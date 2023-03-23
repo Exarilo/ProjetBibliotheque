@@ -21,8 +21,6 @@ import java.io.IOException;
 
 /** Controller principal de l'application. */
 public class MainController {
-
-    @FXML
     private TableView<Livre> Tview ;
     @FXML
     private TextField champTitre;
@@ -38,9 +36,6 @@ public class MainController {
     private TextField champColonne;
     @FXML
     private TextField champRangee;
-
-
-
     @FXML
     /**
      Méthode appelée lorsqu'on clique sur le bouton "Nouveau Livre".
@@ -95,7 +90,6 @@ public class MainController {
         stage.setScene(scene);
         stage.show();
     }
-
     /**
      * Crée un nouveau livre.
      */

@@ -37,66 +37,10 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
 
-        try{
-            Bibliotheque bibliotheque = LoadXML();
-            int a=0;
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
 
     }
 
-    public static Bibliotheque LoadXML() throws IOException, SAXException, ParserConfigurationException, XMLStreamException {
-        XMLInputFactory factory = XMLInputFactory.newInstance();
-        XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream("src/main/resources/com/example/projet_bibliotheque/Biblio.xml"));
-        Bibliotheque bibliotheque = new Bibliotheque();
-        while(reader.hasNext()) {
-            int event = reader.next();
-            if (event == XMLStreamConstants.START_ELEMENT) {
-                if (reader.getLocalName().equals("livre")) {
-                    Livre livre = new Livre();
-                    while (reader.hasNext()) {
-                        event = reader.next();
-                        if (event == XMLStreamConstants.START_ELEMENT) {
-                            String localName = reader.getLocalName();
-                            reader.next();
 
-                            switch (localName) {
-                                case "titre":
-                                    livre.titre=reader.getText();
-                                    break;
-                                case "nom":
-                                    livre.auteur.nom=reader.getText();
-                                    break;
-                                case "prenom":
-                                    livre.auteur.prenom=reader.getText();
-                                    break;
-                                case "presentation":
-                                    livre.presentation=reader.getText();
-                                    break;
-                                case "parution":
-                                    livre.parution= Short.toUnsignedInt(Short.parseShort(reader.getText()));
-                                    break;
-                                case "colonne":
-                                    livre.colonne= Byte.toUnsignedInt(Byte.parseByte(reader.getText()));
-                                    break;
-                                case "rangee":
-                                    livre.rangee= Byte.toUnsignedInt(Byte.parseByte(reader.getText()));
-                                    break;
-                            }
-                        }
-                        else if (event == XMLStreamConstants.END_ELEMENT && reader.getLocalName().equals("livre"))
-                            break;
-                    }
-                    bibliotheque.livre.add(livre);
-                }
-
-            }
-        }
-        return bibliotheque;
-    }
     public static void main(String[] args) {
         launch();
         System.out.println("test");

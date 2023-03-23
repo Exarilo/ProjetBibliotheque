@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  Copyright (c) 2015, 2019, Glu
+  and/or its affiliates.
   All rights reserved. Use is subject to license terms.
 
   This file is available and licensed under the following license:
@@ -76,15 +77,15 @@
         </MenuBar>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="499.0" prefWidth="957.0" VBox.vgrow="ALWAYS" >
             <children>
-                <Button fx:id="lkjml" layoutX="383.0" layoutY="515.0"  mnemonicParsing="false" onAction="#creerLivre" text="+" />
-                <TableView editable="true" layoutX="27.0" layoutY="35.0" prefHeight="400.0" prefWidth="568.0" fx:id="Tview">
+                <Button fx:id="lkjml" layoutX="383.0" layoutY="515.0" mnemonicParsing="false" text="+" />
+                <TableView fx:id="tableView" prefWidth="568.0" prefHeight="400.0" >
                     <columns>
-                        <TableColumn fx:id="ChampTitre" prefWidth="95.0" text="Titre" />
-                        <TableColumn fx:id="ChampAuteur" prefWidth="95.0" text="Auteur" />
-                        <TableColumn fx:id="ChampPresentation" prefWidth="95.0" text="Presentation" />
-                        <TableColumn fx:id="ChampParution" prefWidth="95.0" text="Parution" />
-                        <TableColumn fx:id="ChampColonne" prefWidth="95.0" text="Colonne" />
-                        <TableColumn fx:id="ChampRangée" prefWidth="95.0" text="Rangée" />
+                        <TableColumn fx:id="titreColonne" prefWidth="95.0" text="Titre" />
+                        <TableColumn fx:id="auteurColonne" prefWidth="95.0" text="Auteur" />
+                        <TableColumn fx:id="presentationColonne" prefWidth="95.0" text="Presentation" />
+                        <TableColumn fx:id="parutionColonne" prefWidth="95.0" text="Parution" />
+                        <TableColumn fx:id="colonneColonne" prefWidth="95.0" text="Colonne" />
+                        <TableColumn fx:id="rangeeColonne" prefWidth="95.0" text="Rangée" />
                     </columns>
                 </TableView>
                 <Label layoutX="641.0" layoutY="39.0" text="Titre" />
