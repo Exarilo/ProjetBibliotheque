@@ -38,7 +38,8 @@ public class Main extends Application {
         stage.show();
 
         try{
-            LoadXML();
+            Bibliotheque bibliotheque = LoadXML();
+            int a=0;
         }
         catch (Exception e) {
             throw new RuntimeException(e);
@@ -47,85 +48,58 @@ public class Main extends Application {
 
     }
 
-    public static void LoadXML() throws IOException, SAXException, ParserConfigurationException, XMLStreamException {
+    public static Bibliotheque LoadXML() throws IOException, SAXException, ParserConfigurationException, XMLStreamException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
         XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream("src/main/resources/com/example/projet_bibliotheque/Biblio.xml"));
+        Bibliotheque bibliotheque = new Bibliotheque();
         while(reader.hasNext()) {
             int event = reader.next();
             if (event == XMLStreamConstants.START_ELEMENT) {
                 if (reader.getLocalName().equals("livre")) {
-                    String titre = "";
-                    String auteurNom = "";
-                    String auteurPrenom = "";
-                    String presentation = "";
-                    String parution = "";
-                    String colonne = "";
-                    String rangee = "";
-
+                    Livre livre = new Livre();
                     while (reader.hasNext()) {
                         event = reader.next();
                         if (event == XMLStreamConstants.START_ELEMENT) {
                             String localName = reader.getLocalName();
                             reader.next();
+
                             switch (localName) {
                                 case "titre":
-                                    titre = reader.getText();
+                                    livre.titre=reader.getText();
                                     break;
                                 case "nom":
-                                    auteurNom = reader.getText();
+                                    livre.auteur.nom=reader.getText();
                                     break;
                                 case "prenom":
-                                    auteurPrenom = reader.getText();
+                                    livre.auteur.prenom=reader.getText();
                                     break;
                                 case "presentation":
-                                    presentation = reader.getText();
+                                    livre.presentation=reader.getText();
                                     break;
                                 case "parution":
-                                    parution = reader.getText();
+                                    livre.parution= Short.toUnsignedInt(Short.parseShort(reader.getText()));
                                     break;
                                 case "colonne":
-                                    colonne = reader.getText();
+                                    livre.colonne= Byte.toUnsignedInt(Byte.parseByte(reader.getText()));
                                     break;
                                 case "rangee":
-                                    rangee = reader.getText();
+                                    livre.rangee= Byte.toUnsignedInt(Byte.parseByte(reader.getText()));
                                     break;
                             }
                         }
-                        if (event == XMLStreamConstants.END_ELEMENT) {
-                            if (reader.getLocalName().equals("livre")) {
-                                System.out.println("Titre : " + titre);
-                                System.out.println("Auteur : " + auteurNom + " " + auteurPrenom);
-                                System.out.println("Presentation : " + presentation);
-                                System.out.println("Parution : " + parution);
-                                System.out.println("Colonne : " + colonne);
-                                System.out.println("Rangee : " + rangee);
-                                System.out.println("-------------------------------------");
-                                break;
-                            }
-                        }
+                        else if (event == XMLStreamConstants.END_ELEMENT && reader.getLocalName().equals("livre"))
+                            break;
                     }
+                    bibliotheque.livre.add(livre);
                 }
+
             }
         }
+        return bibliotheque;
     }
     public static void main(String[] args) {
         launch();
         System.out.println("test");
-    }
-    private static File getFileFromResource(String fileName) throws URISyntaxException{
-
-        ClassLoader classLoader = Main.class.getClassLoader();
-        URL resource = classLoader.getResource(fileName);
-        if (resource == null) {
-            throw new IllegalArgumentException("file not found! " + fileName);
-        } else {
-
-            // failed if files have whitespaces or special characters
-            //return new File(resource.getFile());
-
-            return new File(resource.toURI());
-        }
-
     }
 }
 
