@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -19,6 +21,26 @@ import java.io.IOException;
 
 /** Controller principal de l'application. */
 public class MainController {
+
+    @FXML
+    private TableView<Livre> Tview ;
+    @FXML
+    private TextField champTitre;
+    @FXML
+    private TextField champNomAuteur;
+    @FXML
+    private TextField champPrenomAuteur;
+    @FXML
+    private TextField champPresentation;
+    @FXML
+    private TextField champParution;
+    @FXML
+    private TextField champColonne;
+    @FXML
+    private TextField champRangee;
+
+
+
     @FXML
     /**
      Méthode appelée lorsqu'on clique sur le bouton "Nouveau Livre".
@@ -72,5 +94,27 @@ public class MainController {
         Scene scene = new Scene(vbox);
         stage.setScene(scene);
         stage.show();
+    }
+
+    /**
+     * Crée un nouveau livre.
+     */
+    @FXML
+    protected void creerLivre() {
+        Tview.getSelectionModel().clearSelection();
+        clearChamps();
+    }
+
+    /**
+     * Efface le contenu des champs de saisie
+     */
+    private void clearChamps() {
+        champTitre.setText("");
+        champNomAuteur.setText("");
+        champPrenomAuteur.setText("");
+        champPresentation.setText("");
+        champParution.setText("");
+        champColonne.setText("");
+        champRangee.setText("");
     }
 }

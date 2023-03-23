@@ -76,15 +76,15 @@
         </MenuBar>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="499.0" prefWidth="957.0" VBox.vgrow="ALWAYS" >
             <children>
-                <Button fx:id="lkjml" layoutX="383.0" layoutY="515.0" mnemonicParsing="false" text="+" />
-                <TableView editable="true" layoutX="27.0" layoutY="35.0" prefHeight="400.0" prefWidth="568.0">
+                <Button fx:id="lkjml" layoutX="383.0" layoutY="515.0"  mnemonicParsing="false" onAction="#creerLivre" text="+" />
+                <TableView editable="true" layoutX="27.0" layoutY="35.0" prefHeight="400.0" prefWidth="568.0" fx:id="Tview">
                     <columns>
-                        <TableColumn prefWidth="95.0" text="Titre" />
-                        <TableColumn prefWidth="95.0" text="Auteur" />
-                        <TableColumn prefWidth="95.0" text="Presentation" />
-                        <TableColumn prefWidth="95.0" text="Parution" />
-                        <TableColumn prefWidth="95.0" text="Colonne" />
-                        <TableColumn prefWidth="95.0" text="Rangée" />
+                        <TableColumn fx:id="ChampTitre" prefWidth="95.0" text="Titre" />
+                        <TableColumn fx:id="ChampAuteur" prefWidth="95.0" text="Auteur" />
+                        <TableColumn fx:id="ChampPresentation" prefWidth="95.0" text="Presentation" />
+                        <TableColumn fx:id="ChampParution" prefWidth="95.0" text="Parution" />
+                        <TableColumn fx:id="ChampColonne" prefWidth="95.0" text="Colonne" />
+                        <TableColumn fx:id="ChampRangée" prefWidth="95.0" text="Rangée" />
                     </columns>
                 </TableView>
                 <Label layoutX="641.0" layoutY="39.0" text="Titre" />
