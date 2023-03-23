@@ -10,15 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bibliotheque {
+    private String path;
     public List<Livre> livre;
 
-    public Bibliotheque() {
+    public Bibliotheque(String path) throws XMLStreamException, IOException {
         this.livre  =new ArrayList<>();
+        this.path=path;
+        LoadXML(path);
     }
     public void LoadXML(String filepath) throws IOException, XMLStreamException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
         XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(filepath));
-        Bibliotheque bibliotheque = new Bibliotheque();
         while(reader.hasNext()) {
             int event = reader.next();
             if (event == XMLStreamConstants.START_ELEMENT) {

@@ -16,11 +16,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.IOException;
 
 /** Controller principal de l'application. */
 public class MainController {
+    private Bibliotheque bibliotheque;
     private TableView<Livre> Tview ;
     @FXML
     private TextField champTitre;
@@ -54,14 +56,17 @@ public class MainController {
      Méthode appelée lorsqu'on clique sur le bouton "Ouvrir de la menu bar".
      Elle ouvre une boîte de dialogue de sélection de fichier.
      */
-    void handleOuvrirMenuItemAction(ActionEvent event) {
+    void handleOuvrirMenuItemAction(ActionEvent event) throws XMLStreamException, IOException {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fichiers XML (*.xml)", "*.xml");
         fileChooser.getExtensionFilters().add(extFilter);
         File selectedFile = fileChooser.showOpenDialog(null);
 
-        if (selectedFile != null)
-            System.out.println("fichier selectionné");
+        if (selectedFile != null){
+            bibliotheque = new Bibliotheque(selectedFile.getPath());
+            int a=0;
+        }
+
     }
     @FXML
     /**
