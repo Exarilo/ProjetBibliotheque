@@ -1,15 +1,16 @@
 package com.example.projet_bibliotheque;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -19,25 +20,23 @@ import javafx.stage.Stage;
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /** Controller principal de l'application. */
-public class MainController {
+public class MainController implements Initializable {
     private Bibliotheque bibliotheque;
-    private TableView<Livre> Tview ;
-    @FXML
-    private TextField champTitre;
-    @FXML
-    private TextField champNomAuteur;
-    @FXML
-    private TextField champPrenomAuteur;
-    @FXML
-    private TextField champPresentation;
-    @FXML
-    private TextField champParution;
-    @FXML
-    private TextField champColonne;
-    @FXML
-    private TextField champRangee;
+    @FXML private TableView<Livre> tableView;
+    @FXML private TableColumn<Livre, String> champTitre;
+    @FXML private TableColumn<Livre, String> champNomAuteur;
+    @FXML private TableColumn<Livre, String> champPrenomAuteur;
+    @FXML private TableColumn<Livre, String> champPresentation;
+    @FXML private TableColumn<Livre, Integer> champParution;
+    @FXML private TableColumn<Livre, Integer> champColonne;
+    @FXML private TableColumn<Livre, Integer> champRangee;
+
     @FXML
     /**
      Méthode appelée lorsqu'on clique sur le bouton "Nouveau Livre".
@@ -57,16 +56,63 @@ public class MainController {
      Elle ouvre une boîte de dialogue de sélection de fichier.
      */
     void handleOuvrirMenuItemAction(ActionEvent event) throws XMLStreamException, IOException {
+
+        ObservableList<Livre> livres3 = FXCollections.observableArrayList();
+        Livre livre = new Livre();
+        livre.setTitre("adzd");
+        livre.setNomAuteur("cefe");
+        livre.setPrenomAuteur("ffefe");
+        livre.setParution(4);
+        livre.setPresentation("4zfzf");
+        livre.setColonne(1);
+        livre.setRangee(2);
+        livres3.add(livre);
+
+        Livre livre2 = new Livre();
+        livre2.setTitre("adzd");
+        livre2.setNomAuteur("cefde");
+        livre2.setPrenomAuteur("ffedfe");
+        livre2.setParution(4);
+        livre2.setPresentation("4zfzf");
+        livre2.setColonne(1);
+        livre2.setRangee(2);
+        livres3.add(livre2);
+
+
+
+
+
+        tableView.setItems(livres3);
+
+
+
+
+
+/*
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Fichiers XML (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setTitle("Choose an XML file");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML files", "*.xml"));
+
         File selectedFile = fileChooser.showOpenDialog(null);
+
 
         if (selectedFile != null){
             bibliotheque = new Bibliotheque(selectedFile.getPath());
-            int a=0;
-        }
-
+            tableView.getItems().addAll(bibliotheque.livre);
+            ObservableList<Livre> livres = FXCollections.observableList(bibliotheque.livre);
+            tableView.setItems(livres);
+            tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    champTitre.setCellValueFactory(new PropertyValueFactory<Livre, String>("titre"));
+                    champNomAuteur.setText(newValue.auteur.nom);
+                    champPrenomAuteur.setText(newValue.auteur.prenom);
+                    champPresentation.setText(newValue.presentation);
+                    champParution.setText(Integer.toString(newValue.parution));
+                    champColonne.setText(Integer.toString(newValue.colonne));
+                    champRangee.setText(Integer.toString(newValue.rangee));
+                }
+            });
+        }*/
     }
     @FXML
     /**
@@ -100,8 +146,8 @@ public class MainController {
      */
     @FXML
     protected void creerLivre() {
-        Tview.getSelectionModel().clearSelection();
-        clearChamps();
+        tableView.getSelectionModel().clearSelection();
+        //clearChamps();
     }
 
     /**
@@ -115,5 +161,16 @@ public class MainController {
         champParution.setText("");
         champColonne.setText("");
         champRangee.setText("");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        champTitre.setCellValueFactory(new PropertyValueFactory<>("titre"));
+        champNomAuteur.setCellValueFactory(new PropertyValueFactory<>("nomAuteur"));
+        champPrenomAuteur.setCellValueFactory(new PropertyValueFactory<>("prenomAuteur"));
+        champPresentation.setCellValueFactory(new PropertyValueFactory<>("presentation"));
+        champParution.setCellValueFactory(new PropertyValueFactory<>("parution"));
+        champColonne.setCellValueFactory(new PropertyValueFactory<>("colonne"));
+        champRangee.setCellValueFactory(new PropertyValueFactory<>("rangee"));
     }
 }

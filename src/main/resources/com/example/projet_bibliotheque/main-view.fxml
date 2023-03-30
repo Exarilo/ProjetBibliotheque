@@ -80,12 +80,13 @@
                 <Button fx:id="lkjml" layoutX="383.0" layoutY="515.0" mnemonicParsing="false" text="+" />
                 <TableView fx:id="tableView" prefWidth="568.0" prefHeight="400.0" >
                     <columns>
-                        <TableColumn fx:id="titreColonne" prefWidth="95.0" text="Titre" />
-                        <TableColumn fx:id="auteurColonne" prefWidth="95.0" text="Auteur" />
-                        <TableColumn fx:id="presentationColonne" prefWidth="95.0" text="Presentation" />
-                        <TableColumn fx:id="parutionColonne" prefWidth="95.0" text="Parution" />
-                        <TableColumn fx:id="colonneColonne" prefWidth="95.0" text="Colonne" />
-                        <TableColumn fx:id="rangeeColonne" prefWidth="95.0" text="Rangée" />
+                        <TableColumn fx:id="champTitre" prefWidth="81.0" text="Titre" />
+                        <TableColumn fx:id="champNomAuteur" prefWidth="81.0" text="Nom" />
+                        <TableColumn fx:id="champPrenomAuteur" prefWidth="81.0" text="Prenom" />
+                        <TableColumn fx:id="champPresentation" prefWidth="81.0" text="Presentation" />
+                        <TableColumn fx:id="champParution" prefWidth="81.0" text="Parution" />
+                        <TableColumn fx:id="champColonne" prefWidth="81.0" text="Colonne" />
+                        <TableColumn fx:id="champRangee" prefWidth="81.0" text="Rangée" />
                     </columns>
                 </TableView>
                 <Label layoutX="641.0" layoutY="39.0" text="Titre" />

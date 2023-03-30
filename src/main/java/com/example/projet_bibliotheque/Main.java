@@ -19,8 +19,6 @@ public class Main extends Application {
         stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.show();
-
-
     }
 
 

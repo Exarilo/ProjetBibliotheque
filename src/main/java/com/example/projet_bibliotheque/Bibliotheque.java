@@ -34,27 +34,28 @@ public class Bibliotheque {
 
                             switch (localName) {
                                 case "titre":
-                                    livre.titre=reader.getText();
+                                    livre.setTitre(reader.getText());
                                     break;
                                 case "nom":
-                                    livre.auteur.nom=reader.getText();
+                                    livre.setNomAuteur(reader.getText());
                                     break;
                                 case "prenom":
-                                    livre.auteur.prenom=reader.getText();
+                                    livre.setPrenomAuteur(reader.getText());
                                     break;
                                 case "presentation":
-                                    livre.presentation=reader.getText();
+                                    livre.setPresentation(reader.getText());
                                     break;
                                 case "parution":
-                                    livre.parution= Short.toUnsignedInt(Short.parseShort(reader.getText()));
+                                    livre.setParution(Short.toUnsignedInt(Short.parseShort(reader.getText())));
                                     break;
                                 case "colonne":
-                                    livre.colonne= Byte.toUnsignedInt(Byte.parseByte(reader.getText()));
+                                    livre.setColonne(Byte.toUnsignedInt(Byte.parseByte(reader.getText())));
                                     break;
                                 case "rangee":
-                                    livre.rangee= Byte.toUnsignedInt(Byte.parseByte(reader.getText()));
+                                    livre.setRangee(Byte.toUnsignedInt(Byte.parseByte(reader.getText())));
                                     break;
                             }
+
                         }
                         else if (event == XMLStreamConstants.END_ELEMENT && reader.getLocalName().equals("livre"))
                             break;
