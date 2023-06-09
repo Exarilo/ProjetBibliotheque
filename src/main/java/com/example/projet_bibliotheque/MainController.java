@@ -227,6 +227,7 @@ public class MainController implements Initializable {
 //        bibliotheque.toXml();
 //    }
 
+    //Permet de sauvegader sous
     @FXML
     public void handleSauvegarderMenuItemAction() {
         try {
@@ -243,6 +244,8 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
+
+
 
 
 }
