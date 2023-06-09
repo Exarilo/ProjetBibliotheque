@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 
 /** Controller principal de l'application. */
 public class MainController implements Initializable {
+    ObservableList<Livre> livres;
     private Bibliotheque bibliotheque;
     @FXML private TableView<Livre> tableView;
     @FXML private TableColumn<Livre, String> champTitre;
@@ -35,7 +36,8 @@ public class MainController implements Initializable {
 
 
     @FXML private TextField inputTitre;
-    @FXML private TextField inputAuteur;
+    @FXML private TextField inputNomAuteur;
+    @FXML private TextField inputPrenomAuteur;
     @FXML private TextField inputPresentation;
     @FXML private TextField inputParution;
     @FXML private TextField inputColonne;
@@ -48,6 +50,17 @@ public class MainController implements Initializable {
      */
     void handleNouveauLivre(ActionEvent event) {
 
+        Livre livre = new Livre();
+        livre.setTitre(inputTitre.getText());
+        livre.setNomAuteur(inputNomAuteur.getText());
+        livre.setPrenomAuteur(inputPrenomAuteur.getText());
+        livre.setParution(Integer.parseInt(inputParution.getText()));
+        livre.setPresentation(inputPresentation.getText());
+        livre.setColonne(Integer.parseInt(inputColonne.getText()));
+        livre.setRangee(Integer.parseInt(inputRangée.getText()));
+
+        livres.add(livre);
+        tableView.setItems(livres);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText(null);
@@ -61,33 +74,6 @@ public class MainController implements Initializable {
      Elle ouvre une boîte de dialogue de sélection de fichier.
      */
     void handleOuvrirMenuItemAction(ActionEvent event) throws XMLStreamException, IOException {
-
-        ObservableList<Livre> livres3 = FXCollections.observableArrayList();
-        Livre livre = new Livre();
-        livre.setTitre("adzd");
-        livre.setNomAuteur("cefe");
-        livre.setPrenomAuteur("ffefe");
-        livre.setParution(4);
-        livre.setPresentation("4zfzf");
-        livre.setColonne(1);
-        livre.setRangee(2);
-        livres3.add(livre);
-
-        Livre livre2 = new Livre();
-        livre2.setTitre("adzd");
-        livre2.setNomAuteur("cefde");
-        livre2.setPrenomAuteur("ffedfe");
-        livre2.setParution(4);
-        livre2.setPresentation("4zfzf");
-        livre2.setColonne(1);
-        livre2.setRangee(2);
-        livres3.add(livre2);
-
-
-        tableView.setItems(livres3);
-
-
-
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose an XML file");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML files", "*.xml"));
@@ -98,7 +84,7 @@ public class MainController implements Initializable {
         if (selectedFile != null){
             bibliotheque = new Bibliotheque(selectedFile.getPath());
             tableView.getItems().addAll(bibliotheque.livre);
-            ObservableList<Livre> livres = FXCollections.observableList(bibliotheque.livre);
+            livres = FXCollections.observableList(bibliotheque.livre);
             tableView.setItems(livres);
 //            tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 //                if (newValue != null) {
@@ -173,5 +159,21 @@ public class MainController implements Initializable {
         champParution.setCellValueFactory(new PropertyValueFactory<>("parution"));
         champColonne.setCellValueFactory(new PropertyValueFactory<>("colonne"));
         champRangee.setCellValueFactory(new PropertyValueFactory<>("rangee"));
+
+        Register();
+    }
+
+    private void Register(){
+        tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                inputTitre.setText(newValue.getTitre());
+                inputNomAuteur.setText(newValue.getNomAuteur());
+                inputPrenomAuteur.setText(newValue.getPrenomAuteur());
+                inputPresentation.setText(newValue.getPresentation());
+                inputParution.setText(Integer.toString(newValue.getParution()));
+                inputColonne.setText(Integer.toString(newValue.getColonne()));
+                inputRangée.setText(Integer.toString(newValue.getRangee()));
+            }
+        });
     }
 }

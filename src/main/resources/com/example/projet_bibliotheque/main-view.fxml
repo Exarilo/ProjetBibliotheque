@@ -91,18 +91,20 @@
                 </TableView>
                 <Label layoutX="641.0" layoutY="39.0" text="Titre" />
                 <Button layoutX="453.0" layoutY="515.0" mnemonicParsing="false" text="-" />
-                <Label layoutX="644.0" layoutY="117.0" text="Auteur" />
-                <Label layoutX="633.0" layoutY="199.0" text="Presentation" />
-                <Label layoutX="644.0" layoutY="270.0" text="Parution" />
-                <Label layoutX="644.0" layoutY="360.0" text="Colonne" />
-                <Label layoutX="644.0" layoutY="441.0" text="Rangée" />
+                <Label layoutX="621.0" layoutY="96.0" text="Nom auteur" />
+                <Label layoutX="614.0" layoutY="152.0" text="Prenom auteur" />
+                <Label layoutX="620.0" layoutY="213.0" text="Presentation" />
+                <Label layoutX="631.0" layoutY="279.0" text="Parution" />
+                <Label layoutX="631.0" layoutY="339.0" text="Colonne" />
+                <Label layoutX="633.0" layoutY="392.0" text="Rangée" />
                 <TextField fx:id="inputTitre" layoutX="724.0" layoutY="35.0" />
-                <TextField fx:id="inputAuteur" layoutX="728.0" layoutY="113.0" />
-                <TextField fx:id="inputPresentation" layoutX="726.0" layoutY="195.0" prefHeight="26.0" prefWidth="152.0" />
-                <TextField fx:id="inputParution" layoutX="724.0" layoutY="266.0" />
-                <TextField fx:id="inputColonne" layoutX="723.0" layoutY="356.0" />
-                <TextField fx:id="inputRangée" layoutX="723.0" layoutY="437.0" />
-                <Button layoutX="819.0" layoutY="522.0" mnemonicParsing="false" onAction="#handleNouveauLivre" text="Valider" />
+                <TextField fx:id="inputNomAuteur" layoutX="723.0" layoutY="92.0" />
+                <TextField fx:id="inputPrenomAuteur" layoutX="723.0" layoutY="148.0" />
+                <TextField fx:id="inputPresentation" layoutX="723.0" layoutY="209.0" prefHeight="26.0" prefWidth="152.0" />
+                <TextField fx:id="inputParution" layoutX="725.0" layoutY="275.0" />
+                <TextField fx:id="inputColonne" layoutX="723.0" layoutY="335.0" />
+                <TextField fx:id="inputRangée" layoutX="723.0" layoutY="397.0" />
+                <Button layoutX="747.0" layoutY="466.0" mnemonicParsing="false" onAction="#handleNouveauLivre" text="Valider" />
             </children>
         </AnchorPane>
     </children>
