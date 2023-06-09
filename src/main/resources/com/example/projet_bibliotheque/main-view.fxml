@@ -96,12 +96,12 @@
                 <Label layoutX="644.0" layoutY="270.0" text="Parution" />
                 <Label layoutX="644.0" layoutY="360.0" text="Colonne" />
                 <Label layoutX="644.0" layoutY="441.0" text="Rangée" />
-                <TextField layoutX="724.0" layoutY="35.0" />
-                <TextField layoutX="728.0" layoutY="113.0" />
-                <TextField layoutX="726.0" layoutY="195.0" prefHeight="26.0" prefWidth="152.0" />
-                <TextField layoutX="724.0" layoutY="266.0" />
-                <TextField layoutX="723.0" layoutY="356.0" />
-                <TextField layoutX="723.0" layoutY="437.0" />
+                <TextField fx:id="inputTitre" layoutX="724.0" layoutY="35.0" />
+                <TextField fx:id="inputAuteur" layoutX="728.0" layoutY="113.0" />
+                <TextField fx:id="inputPresentation" layoutX="726.0" layoutY="195.0" prefHeight="26.0" prefWidth="152.0" />
+                <TextField fx:id="inputParution" layoutX="724.0" layoutY="266.0" />
+                <TextField fx:id="inputColonne" layoutX="723.0" layoutY="356.0" />
+                <TextField fx:id="inputRangée" layoutX="723.0" layoutY="437.0" />
                 <Button layoutX="819.0" layoutY="522.0" mnemonicParsing="false" onAction="#handleNouveauLivre" text="Valider" />
             </children>
         </AnchorPane>

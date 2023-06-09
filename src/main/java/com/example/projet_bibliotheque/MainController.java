@@ -5,9 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,8 +19,6 @@ import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /** Controller principal de l'application. */
@@ -37,12 +33,21 @@ public class MainController implements Initializable {
     @FXML private TableColumn<Livre, Integer> champColonne;
     @FXML private TableColumn<Livre, Integer> champRangee;
 
+
+    @FXML private TextField inputTitre;
+    @FXML private TextField inputAuteur;
+    @FXML private TextField inputPresentation;
+    @FXML private TextField inputParution;
+    @FXML private TextField inputColonne;
+    @FXML private TextField inputRangée;
+
     @FXML
     /**
      Méthode appelée lorsqu'on clique sur le bouton "Nouveau Livre".
      Elle affiche une boîte de dialogue d'information pour dire qu'un livre a bien été rajouté.
      */
     void handleNouveauLivre(ActionEvent event) {
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText(null);
@@ -79,13 +84,7 @@ public class MainController implements Initializable {
         livres3.add(livre2);
 
 
-
-
-
         tableView.setItems(livres3);
-
-
-
 
 
 
@@ -101,7 +100,6 @@ public class MainController implements Initializable {
             tableView.getItems().addAll(bibliotheque.livre);
             ObservableList<Livre> livres = FXCollections.observableList(bibliotheque.livre);
             tableView.setItems(livres);
-
 //            tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 //                if (newValue != null) {
 //
