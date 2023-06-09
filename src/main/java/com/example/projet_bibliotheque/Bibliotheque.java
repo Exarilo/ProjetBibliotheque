@@ -13,9 +13,12 @@ import javax.xml.stream.XMLStreamWriter;
 import java.io.FileWriter;
 
 public class Bibliotheque {
-    private String path;
+    public String path;
     public List<Livre> livre;
 
+    public Bibliotheque()  {
+        this.livre  =new ArrayList<>();
+    }
     public Bibliotheque(String path) throws XMLStreamException, IOException {
         this.livre  =new ArrayList<>();
         this.path=path;
@@ -69,57 +72,55 @@ public class Bibliotheque {
 
         // Constructeur, getters, setters, etc.
 
-    } public void toXml(String SavingPath) throws IOException, XMLStreamException {
-            XMLOutputFactory factory = XMLOutputFactory.newInstance();
-            XMLStreamWriter writer = factory.createXMLStreamWriter(new FileWriter(SavingPath));
-
-            // Écrire l'en-tête XML
-            writer.writeStartDocument();
-            writer.writeStartElement("bibliotheque");
-
-            // Parcourir la liste de livres
-            for (Livre livre : livre) {
-                writer.writeStartElement("livre");
-
-                // Écrire les attributs du livre
-                writer.writeStartElement("titre");
-                writer.writeCharacters(livre.getTitre());
-                writer.writeEndElement();
-
-                writer.writeStartElement("Nom Auteur");
-                writer.writeCharacters(livre.getNomAuteur());
-                writer.writeEndElement();
-
-                writer.writeStartElement("Prénom Auteur");
-                writer.writeCharacters(livre.getPrenomAuteur());
-                writer.writeEndElement();
-
-                writer.writeStartElement("Présentation");
-                writer.writeCharacters(String.valueOf(livre.getPresentation()));
-                writer.writeEndElement();
-
-                writer.writeStartElement("Parution");
-                writer.writeCharacters(String.valueOf(livre.getParution()));
-                writer.writeEndElement();
-
-                writer.writeStartElement("Colonne");
-                writer.writeCharacters(String.valueOf(livre.getColonne()));
-                writer.writeEndElement();
-
-                writer.writeStartElement("Range");
-                writer.writeCharacters(String.valueOf(livre.getRangee()));
-                writer.writeEndElement();
-
-                writer.writeEndElement(); // Fermer l'élément "livre"
-            }
-
-            writer.writeEndElement(); // Fermer l'élément "bibliotheque"
-            writer.writeEndDocument();
-
-            writer.flush();
-            writer.close();
-        }
     }
+    public void toXml(String SavingPath) throws IOException, XMLStreamException {
+        XMLOutputFactory factory = XMLOutputFactory.newInstance();
+        XMLStreamWriter writer = factory.createXMLStreamWriter(new FileWriter(SavingPath));
+
+        writer.writeStartDocument();
+        writer.writeStartElement("bibliotheque");
+
+        for (Livre livre : livre) {
+            writer.writeStartElement("livre");
+
+            writer.writeStartElement("titre");
+            writer.writeCharacters(livre.getTitre());
+            writer.writeEndElement();
+
+            writer.writeStartElement("Nom Auteur");
+            writer.writeCharacters(livre.getNomAuteur());
+            writer.writeEndElement();
+
+            writer.writeStartElement("Prénom Auteur");
+            writer.writeCharacters(livre.getPrenomAuteur());
+            writer.writeEndElement();
+
+            writer.writeStartElement("Présentation");
+            writer.writeCharacters(String.valueOf(livre.getPresentation()));
+            writer.writeEndElement();
+
+            writer.writeStartElement("Parution");
+            writer.writeCharacters(String.valueOf(livre.getParution()));
+            writer.writeEndElement();
+
+            writer.writeStartElement("Colonne");
+            writer.writeCharacters(String.valueOf(livre.getColonne()));
+            writer.writeEndElement();
+
+            writer.writeStartElement("Range");
+            writer.writeCharacters(String.valueOf(livre.getRangee()));
+            writer.writeEndElement();
+
+            writer.writeEndElement();
+        }
+
+        writer.writeEndElement();
+        writer.writeEndDocument();
+
+        writer.flush();
+        writer.close();
+    }
+}
 
 
 

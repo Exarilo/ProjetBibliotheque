@@ -53,18 +53,25 @@ public class MainController implements Initializable {
         livre.setTitre(inputTitre.getText());
         livre.setNomAuteur(inputNomAuteur.getText());
         livre.setPrenomAuteur(inputPrenomAuteur.getText());
-        livre.setParution(Integer.parseInt(inputParution.getText()));
         livre.setPresentation(inputPresentation.getText());
-        livre.setColonne(Integer.parseInt(inputColonne.getText()));
-        livre.setRangee(Integer.parseInt(inputRangée.getText()));
+        try {
+            livre.setParution(Integer.parseInt(inputParution.getText()));
+            livre.setColonne(Integer.parseInt(inputColonne.getText()));
+            livre.setRangee(Integer.parseInt(inputRangée.getText()));
 
-        livres.add(livre);
-        tableView.setItems(livres);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText("Et boom c'est validé");
-        alert.showAndWait();
+            livres.add(livre);
+
+            tableView.setItems(livres);
+        } catch (NumberFormatException e) {
+            if (e.getMessage().contains(inputParution.getText())) {
+                livre.wrongFieldAlert.setContentText("Le champ parution doit être renseigné et de type entier");
+            } else if (e.getMessage().contains(inputColonne.getText())) {
+                livre.wrongFieldAlert.setContentText("Le champ colonne doit être renseigné et de type entier");
+            } else if (e.getMessage().contains(inputRangée.getText())) {
+                livre.wrongFieldAlert.setContentText("Le champ rangée doit être renseigné et de type entier");
+            }
+            livre.wrongFieldAlert.showAndWait();
+        }
     }
 
     @FXML
@@ -151,6 +158,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        bibliotheque= new Bibliotheque();
         champTitre.setCellValueFactory(new PropertyValueFactory<>("titre"));
         champNomAuteur.setCellValueFactory(new PropertyValueFactory<>("nomAuteur"));
         champPrenomAuteur.setCellValueFactory(new PropertyValueFactory<>("prenomAuteur"));
@@ -158,7 +166,9 @@ public class MainController implements Initializable {
         champParution.setCellValueFactory(new PropertyValueFactory<>("parution"));
         champColonne.setCellValueFactory(new PropertyValueFactory<>("colonne"));
         champRangee.setCellValueFactory(new PropertyValueFactory<>("rangee"));
-
+        bibliotheque= new Bibliotheque();
+        livres = FXCollections.observableList(bibliotheque.livre);
+        tableView.setItems(livres);
         Register();
     }
 
@@ -181,7 +191,7 @@ public class MainController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText(null);
-        alert.setContentText("Et boom c'est supprimer");
+        alert.setContentText("Livre supprimé");
         alert.showAndWait();
     }
 
@@ -204,31 +214,20 @@ public class MainController implements Initializable {
         }
     }
 
-//    @FXML
-//    public void handleSauvegarderMenuItemAction(ActionEvent event) {
-//        // Récupérer le fichier sélectionné lors de l'ouverture
-//        File selectedFile = ... // Récupérer le fichier sélectionné précédemment
-//
-//        if (selectedFile != null) {
-//            // Mettre à jour les données du fichier avec les modifications
-//            bibliotheque.livre.clear();
-//            bibliotheque.livre.addAll(livres);
-//            bibliotheque.enregistrer(selectedFile.getPath());
-//
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("Information");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Modifications enregistrées avec succès !");
-//            alert.showAndWait();
-//        }
-//    }
-
-//    public void handleSauvegarderMenuItemAction(){
-//        bibliotheque.toXml();
-//    }
-
     @FXML
     public void handleSauvegarderMenuItemAction() {
+        try {
+            if(bibliotheque.path!=null &&!bibliotheque.path.isEmpty())
+                bibliotheque.toXml(bibliotheque.path);
+            else
+                handleSauvegarderSousMenuItemAction();
+
+        } catch (IOException | XMLStreamException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void handleSauvegarderSousMenuItemAction() {
         try {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Save XML File");
@@ -243,6 +242,4 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
 }

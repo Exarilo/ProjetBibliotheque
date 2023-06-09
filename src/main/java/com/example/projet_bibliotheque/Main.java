@@ -23,7 +23,6 @@ public class Main extends Application {
         stage.show();
     }
 
-
     public static void main(String[] args) {
         launch();
         System.out.println("test");
@@ -38,4 +37,3 @@ public class Main extends Application {
         alert.showAndWait();
     }
 }
-

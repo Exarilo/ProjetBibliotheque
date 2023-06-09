@@ -3,9 +3,11 @@ package com.example.projet_bibliotheque;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Alert;
 
 /**Class Livre**/
 public class Livre {
+    public Alert wrongFieldAlert = new Alert(Alert.AlertType.WARNING);
     private SimpleStringProperty titre = new SimpleStringProperty();
     private SimpleStringProperty nomAuteur = new SimpleStringProperty();
     private SimpleStringProperty prenomAuteur = new SimpleStringProperty();
@@ -14,6 +16,9 @@ public class Livre {
     private SimpleIntegerProperty colonne = new SimpleIntegerProperty();
     private SimpleIntegerProperty rangee = new SimpleIntegerProperty();
 
+    public Livre(){
+        wrongFieldAlert.setTitle("Erreur de champs de saisie");
+    }
     public String getTitre() {
         return titre.get();
     }
@@ -23,6 +28,10 @@ public class Livre {
     }
 
     public void setTitre(String titre) {
+        if(titre==null||titre.length()==0){
+            wrongFieldAlert.setContentText("Le champ titre doit être renseigné");
+            wrongFieldAlert.showAndWait();
+        }
         this.titre.set(titre);
     }
 
@@ -35,6 +44,10 @@ public class Livre {
     }
 
     public void setNomAuteur(String nomAuteur) {
+        if(nomAuteur==null||nomAuteur.length()==0){
+            wrongFieldAlert.setContentText("Le champ nom auteur doit être renseigné");
+            wrongFieldAlert.showAndWait();
+        }
         this.nomAuteur.set(nomAuteur);
     }
 
@@ -47,6 +60,10 @@ public class Livre {
     }
 
     public void setPrenomAuteur(String prenomAuteur) {
+        if(prenomAuteur==null||prenomAuteur.length()==0){
+            wrongFieldAlert.setContentText("Le champ prenom auteur doit être renseigné");
+            wrongFieldAlert.showAndWait();
+        }
         this.prenomAuteur.set(prenomAuteur);
     }
 
@@ -59,6 +76,10 @@ public class Livre {
     }
 
     public void setPresentation(String presentation) {
+        if(presentation==null||presentation.length()==0){
+            wrongFieldAlert.setContentText("Le champ presentation auteur doit être renseigné");
+            wrongFieldAlert.showAndWait();
+        }
         this.presentation.set(presentation);
     }
 
