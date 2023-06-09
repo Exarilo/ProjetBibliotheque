@@ -214,6 +214,9 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Permet de sauvegarder le fichier ouvert
+     */
     @FXML
     public void handleSauvegarderMenuItemAction() {
         try {
@@ -226,6 +229,9 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
+    /**
+     * Permet de sauvegarder sous
+     */
     @FXML
     public void handleSauvegarderSousMenuItemAction() {
         try {
