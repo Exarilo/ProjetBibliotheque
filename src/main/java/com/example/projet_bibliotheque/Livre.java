@@ -106,4 +106,5 @@ public class Livre {
         nomAuteur.set(auteur.getNom());
         prenomAuteur.set(auteur.getPrenom());
     }
+
 }

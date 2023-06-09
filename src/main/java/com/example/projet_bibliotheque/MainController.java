@@ -185,7 +185,7 @@ public class MainController implements Initializable {
         alert.showAndWait();
     }
 
-    public void DeleteBook(){
+    public void DeleteField(){
                 inputTitre.setText("");
                 inputNomAuteur.setText("");
                 inputPrenomAuteur.setText("");
@@ -201,6 +201,46 @@ public class MainController implements Initializable {
         Livre selectedObject = tableView.getSelectionModel().getSelectedItem();
         if (selectedObject != null) {
             tableView.getItems().remove(selectedObject);
+        }
+    }
+
+//    @FXML
+//    public void handleSauvegarderMenuItemAction(ActionEvent event) {
+//        // Récupérer le fichier sélectionné lors de l'ouverture
+//        File selectedFile = ... // Récupérer le fichier sélectionné précédemment
+//
+//        if (selectedFile != null) {
+//            // Mettre à jour les données du fichier avec les modifications
+//            bibliotheque.livre.clear();
+//            bibliotheque.livre.addAll(livres);
+//            bibliotheque.enregistrer(selectedFile.getPath());
+//
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("Information");
+//            alert.setHeaderText(null);
+//            alert.setContentText("Modifications enregistrées avec succès !");
+//            alert.showAndWait();
+//        }
+//    }
+
+//    public void handleSauvegarderMenuItemAction(){
+//        bibliotheque.toXml();
+//    }
+
+    @FXML
+    public void handleSauvegarderMenuItemAction() {
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save XML File");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XML files", "*.xml"));
+
+            File selectedFile = fileChooser.showSaveDialog(null);
+
+            if (selectedFile != null) {
+                bibliotheque.toXml(selectedFile.getPath());
+            }
+        } catch (IOException | XMLStreamException e) {
+            e.printStackTrace();
         }
     }
 

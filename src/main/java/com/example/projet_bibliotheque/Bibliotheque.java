@@ -8,6 +8,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamWriter;
+import java.io.FileWriter;
 
 public class Bibliotheque {
     private String path;
@@ -21,7 +24,7 @@ public class Bibliotheque {
     public void LoadXML(String filepath) throws IOException, XMLStreamException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
         XMLStreamReader reader = factory.createXMLStreamReader(new FileInputStream(filepath));
-        while(reader.hasNext()) {
+        while (reader.hasNext()) {
             int event = reader.next();
             if (event == XMLStreamConstants.START_ELEMENT) {
                 if (reader.getLocalName().equals("livre")) {
@@ -56,16 +59,67 @@ public class Bibliotheque {
                                     break;
                             }
 
-                        }
-                        else if (event == XMLStreamConstants.END_ELEMENT && reader.getLocalName().equals("livre"))
+                        } else if (event == XMLStreamConstants.END_ELEMENT && reader.getLocalName().equals("livre"))
                             break;
                     }
                     this.livre.add(livre);
                 }
             }
         }
+
+        // Constructeur, getters, setters, etc.
+
+    } public void toXml(String SavingPath) throws IOException, XMLStreamException {
+            XMLOutputFactory factory = XMLOutputFactory.newInstance();
+            XMLStreamWriter writer = factory.createXMLStreamWriter(new FileWriter(SavingPath));
+
+            // Écrire l'en-tête XML
+            writer.writeStartDocument();
+            writer.writeStartElement("bibliotheque");
+
+            // Parcourir la liste de livres
+            for (Livre livre : livre) {
+                writer.writeStartElement("livre");
+
+                // Écrire les attributs du livre
+                writer.writeStartElement("titre");
+                writer.writeCharacters(livre.getTitre());
+                writer.writeEndElement();
+
+                writer.writeStartElement("Nom Auteur");
+                writer.writeCharacters(livre.getNomAuteur());
+                writer.writeEndElement();
+
+                writer.writeStartElement("Prénom Auteur");
+                writer.writeCharacters(livre.getPrenomAuteur());
+                writer.writeEndElement();
+
+                writer.writeStartElement("Présentation");
+                writer.writeCharacters(String.valueOf(livre.getPresentation()));
+                writer.writeEndElement();
+
+                writer.writeStartElement("Parution");
+                writer.writeCharacters(String.valueOf(livre.getParution()));
+                writer.writeEndElement();
+
+                writer.writeStartElement("Colonne");
+                writer.writeCharacters(String.valueOf(livre.getColonne()));
+                writer.writeEndElement();
+
+                writer.writeStartElement("Range");
+                writer.writeCharacters(String.valueOf(livre.getRangee()));
+                writer.writeEndElement();
+
+                writer.writeEndElement(); // Fermer l'élément "livre"
+            }
+
+            writer.writeEndElement(); // Fermer l'élément "bibliotheque"
+            writer.writeEndDocument();
+
+            writer.flush();
+            writer.close();
+        }
     }
-}
 
 
 
