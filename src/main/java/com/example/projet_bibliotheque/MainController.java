@@ -101,18 +101,20 @@ public class MainController implements Initializable {
             tableView.getItems().addAll(bibliotheque.livre);
             ObservableList<Livre> livres = FXCollections.observableList(bibliotheque.livre);
             tableView.setItems(livres);
-            tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue != null) {
-                    /*
-                    champTitre.setCellValueFactory(new PropertyValueFactory<Livre, String>("titre"));
-                    champNomAuteur.setText(newValue.auteur.nom);
-                    champPrenomAuteur.setText(newValue.auteur.prenom);
-                    champPresentation.setText(newValue.presentation);
-                    champParution.setText(Integer.toString(newValue.parution));
-                    champColonne.setText(Integer.toString(newValue.colonne));
-                    champRangee.setText(Integer.toString(newValue.rangee));*/
-                }
-            });
+
+//            tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+//                if (newValue != null) {
+//
+//                    /*
+//                    champTitre.setCellValueFactory(new PropertyValueFactory<Livre, String>("titre"));
+//                    champNomAuteur.setText(newValue.auteur.nom);
+//                    champPrenomAuteur.setText(newValue.auteur.prenom);
+//                    champPresentation.setText(newValue.presentation);
+//                    champParution.setText(Integer.toString(newValue.parution));
+//                    champColonne.setText(Integer.toString(newValue.colonne));
+//                    champRangee.setText(Integer.toString(newValue.rangee));*/
+//                }
+//            });
         }
     }
     @FXML
