@@ -45,14 +45,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="616.0" prefWidth="949.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projet_bibliotheque.MainController">
+<VBox prefHeight="616.0" prefWidth="949.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projet_bibliotheque.MainController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
                 <Menu mnemonicParsing="false" text="Fichier">
                     <items>
-                        <MenuItem fx:id="ouvrirMenuItem" mnemonicParsing="false" text="Ouvrir" onAction="#handleOuvrirMenuItemAction" />
-                        <MenuItem fx:id="quitterMenuItem" mnemonicParsing="false" text="Quitter" onAction="#handleQuitterMenuItemAction" />
+                        <MenuItem fx:id="ouvrirMenuItem" mnemonicParsing="false" onAction="#handleOuvrirMenuItemAction" text="Ouvrir" />
+                        <MenuItem fx:id="quitterMenuItem" mnemonicParsing="false" onAction="#handleQuitterMenuItemAction" text="Quitter" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edition">
@@ -63,7 +63,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="About">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Infos" onAction="#handleInfosMenuItemAction" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleInfosMenuItemAction" text="Infos" />
                     </items>
                 </Menu>
             </menus>
@@ -75,10 +75,10 @@
                 </ContextMenu>
             </contextMenu>
         </MenuBar>
-        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="499.0" prefWidth="957.0" VBox.vgrow="ALWAYS" >
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="499.0" prefWidth="957.0" VBox.vgrow="ALWAYS">
             <children>
                 <Button fx:id="lkjml" layoutX="383.0" layoutY="515.0" mnemonicParsing="false" text="+" />
-                <TableView fx:id="tableView" prefWidth="568.0" prefHeight="400.0" >
+                <TableView fx:id="tableView" prefHeight="400.0" prefWidth="568.0">
                     <columns>
                         <TableColumn fx:id="champTitre" prefWidth="81.0" text="Titre" />
                         <TableColumn fx:id="champNomAuteur" prefWidth="81.0" text="Nom" />
@@ -105,6 +105,7 @@
                 <TextField fx:id="inputColonne" layoutX="723.0" layoutY="335.0" />
                 <TextField fx:id="inputRangée" layoutX="723.0" layoutY="397.0" />
                 <Button layoutX="747.0" layoutY="466.0" mnemonicParsing="false" onAction="#handleNouveauLivre" text="Valider" />
+                <Button layoutX="225.0" layoutY="410.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="Supprimer" />
             </children>
         </AnchorPane>
     </children>

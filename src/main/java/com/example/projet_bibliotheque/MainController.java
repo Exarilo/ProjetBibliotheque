@@ -175,4 +175,34 @@ public class MainController implements Initializable {
             }
         });
     }
+
+    public void handleSupprimer(ActionEvent event){
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText("Et boom c'est supprimer");
+        alert.showAndWait();
+    }
+
+    public void DeleteBook(){
+                inputTitre.setText("");
+                inputNomAuteur.setText("");
+                inputPrenomAuteur.setText("");
+                inputPresentation.setText("");
+                inputParution.setText("");
+                inputColonne.setText("");
+                inputRangée.setText("");
+
+    }
+
+    @FXML
+    public void deleteSelectedRow(ActionEvent event) {
+        Livre selectedObject = tableView.getSelectionModel().getSelectedItem();
+        if (selectedObject != null) {
+            tableView.getItems().remove(selectedObject);
+        }
+    }
+
+
 }

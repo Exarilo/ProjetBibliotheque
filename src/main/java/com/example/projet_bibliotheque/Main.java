@@ -1,8 +1,10 @@
 package com.example.projet_bibliotheque;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -25,6 +27,15 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch();
         System.out.println("test");
+    }
+
+    public void handleSupprimer(ActionEvent event){
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText("Et boom c'est supprimer");
+        alert.showAndWait();
     }
 }
 
