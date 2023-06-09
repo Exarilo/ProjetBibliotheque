@@ -49,7 +49,6 @@ public class MainController implements Initializable {
      Elle affiche une boîte de dialogue d'information pour dire qu'un livre a bien été rajouté.
      */
     void handleNouveauLivre(ActionEvent event) {
-
         Livre livre = new Livre();
         livre.setTitre(inputTitre.getText());
         livre.setNomAuteur(inputNomAuteur.getText());
