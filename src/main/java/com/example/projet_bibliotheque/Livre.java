@@ -5,7 +5,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
 
-/**Class Livre**/
+/**
+ * La class livre gere toutes les proprietes relatives a un livre dans le XML on y retrouve
+ * également de la gestion d'erreur dans les setteurs au cas ou le format n'est pas le bon
+ */
 public class Livre {
     public Alert wrongFieldAlert = new Alert(Alert.AlertType.WARNING);
     private SimpleStringProperty titre = new SimpleStringProperty();

@@ -12,6 +12,10 @@ import java.io.IOException;
 
 public class Main extends Application {
     @Override
+    /**
+     * La methode start est le point d'entré de l'application. elle vient construire l'IHM en se
+     * basant sur main-view.fxml (construit avec Scene Builder)
+     */
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 950, 600);
@@ -25,15 +29,5 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch();
-        System.out.println("test");
-    }
-
-    public void handleSupprimer(ActionEvent event){
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText("Et boom c'est supprimer");
-        alert.showAndWait();
     }
 }

@@ -156,6 +156,9 @@ public class MainController implements Initializable {
         champRangee.setText("");
     }
 
+    /**
+     * initialise les champs necessaire a l'IHM a la creation
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         bibliotheque= new Bibliotheque();
@@ -171,7 +174,9 @@ public class MainController implements Initializable {
         tableView.setItems(livres);
         Register();
     }
-
+    /**
+     *permet sur le clique dans le tableau de reseigner les champs sur la droite de l'IHM
+     */
     private void Register(){
         tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
