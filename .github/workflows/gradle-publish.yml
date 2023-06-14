@@ -29,3 +29,5 @@
             run: mvn -B package --file pom.xml
           - name: Test with Maven
             run: mvn test
+          - name: Generate Javadoc
+            run: mvn javadoc:javadoc
