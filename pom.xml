@@ -12,8 +12,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.9.1</junit.version>
-        <sonar.projectKey>my_project_key</sonar.projectKey>
-        <sonar.organization>my_organization</sonar.organization>
+        <sonar.projectKey>exarilo</sonar.projectKey>
+        <sonar.organization>Exarilo</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
