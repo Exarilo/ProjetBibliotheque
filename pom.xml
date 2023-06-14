@@ -12,6 +12,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.9.1</junit.version>
+        <sonar.projectKey>my_project_key</sonar.projectKey>
+        <sonar.organization>my_organization</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
 
@@ -68,6 +71,11 @@
                     <source>11</source>
                     <target>11</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.8.0.2131</version>
             </plugin>
             <plugin>
                 <groupId>org.openjfx</groupId>
