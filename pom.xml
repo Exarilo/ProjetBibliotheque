@@ -99,19 +99,19 @@
                     </execution>
                 </executions>
             </plugin>
-                <plugin>
-                    <groupId>org.cyclonedx</groupId>
-                        <artifactId>cyclonedx-maven-plugin</artifactId>
-                            <version>2.5.4</version>
-                            <executions>
-                                <execution>
-                                    <goals>
-                                        <goal>makeAggregateBom</goal>
-                                    </goals>
-                                <phase>verify</phase>
-                        </execution>
-                    </executions>
-                </plugin>
+            <plugin>
+                <groupId>org.cyclonedx</groupId>
+                <artifactId>cyclonedx-maven-plugin</artifactId>
+                <version>2.5.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>makeAggregateBom</goal>
+                        </goals>
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
