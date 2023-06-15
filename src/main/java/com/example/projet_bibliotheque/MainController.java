@@ -260,9 +260,15 @@ public class MainController implements Initializable {
      */
     @FXML
     public void handleOpenBDD() {
-        if(btOuvrirBDD.getText().equals("Connexion"))
+        if(btOuvrirBDD.getText().equals("Connexion")) {
             btOuvrirBDD.setText("Deconnexion");
-        else
+            BDD bdd = new BDD();
+            bdd.getConnection();
+        }
+        else {
             btOuvrirBDD.setText("Connexion");
+        }
     }
+
+
 }
