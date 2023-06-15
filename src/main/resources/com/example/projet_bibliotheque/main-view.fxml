@@ -105,6 +105,7 @@
                 <Button layoutX="762.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleNouveauLivre" prefHeight="25.0" prefWidth="64.0" text="Valider" />
                 <Button layoutX="225.0" layoutY="410.0" mnemonicParsing="false" onAction="#handleSupprimer" text="Supprimer" />
                 <Button layoutX="762.0" layoutY="441.0" mnemonicParsing="false" onAction="#DeleteField" prefHeight="25.0" prefWidth="64.0" text="Effacer" />
+            <Button layoutX="202.0" layoutY="472.0" mnemonicParsing="false" onAction="#OpenBDD" prefHeight="36.0" prefWidth="118.0" text="Connexion BDD" />
             </children>
         </AnchorPane>
     </children>
