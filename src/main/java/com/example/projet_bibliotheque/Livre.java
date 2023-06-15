@@ -1,8 +1,4 @@
 package com.example.projet_bibliotheque;
-
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
 
 /**
@@ -10,24 +6,21 @@ import javafx.scene.control.Alert;
  * également de la gestion d'erreur dans les setteurs au cas ou le format n'est pas le bon
  */
 public class Livre {
-    public Alert wrongFieldAlert = new Alert(Alert.AlertType.WARNING);
-    private SimpleStringProperty titre = new SimpleStringProperty();
-    private SimpleStringProperty nomAuteur = new SimpleStringProperty();
-    private SimpleStringProperty prenomAuteur = new SimpleStringProperty();
-    private SimpleStringProperty presentation = new SimpleStringProperty();
-    private SimpleIntegerProperty parution = new SimpleIntegerProperty();
-    private SimpleIntegerProperty colonne = new SimpleIntegerProperty();
-    private SimpleIntegerProperty rangee = new SimpleIntegerProperty();
+    public Alert wrongFieldAlert;
+    private String titre;
+    private String nomAuteur;
+    private String prenomAuteur;
+    private String presentation;
+    private int parution;
+    private int colonne ;
+    private int rangee;
 
     public Livre(){
+        wrongFieldAlert= new Alert(Alert.AlertType.WARNING);
         wrongFieldAlert.setTitle("Erreur de champs de saisie");
     }
     public String getTitre() {
-        return titre.get();
-    }
-
-    public SimpleStringProperty titreProperty() {
-        return titre;
+        return this.titre;
     }
 
     public void setTitre(String titre) {
@@ -35,14 +28,10 @@ public class Livre {
             wrongFieldAlert.setContentText("Le champ titre doit être renseigné");
             wrongFieldAlert.showAndWait();
         }
-        this.titre.set(titre);
+        this.titre=titre;
     }
 
     public String getNomAuteur() {
-        return nomAuteur.get();
-    }
-
-    public SimpleStringProperty nomAuteurProperty() {
         return nomAuteur;
     }
 
@@ -51,84 +40,68 @@ public class Livre {
             wrongFieldAlert.setContentText("Le champ nom auteur doit être renseigné");
             wrongFieldAlert.showAndWait();
         }
-        this.nomAuteur.set(nomAuteur);
+        this.nomAuteur=nomAuteur;
     }
 
     public String getPrenomAuteur() {
-        return prenomAuteur.get();
-    }
-
-    public SimpleStringProperty prenomAuteurProperty() {
         return prenomAuteur;
     }
-
     public void setPrenomAuteur(String prenomAuteur) {
         if(prenomAuteur==null||prenomAuteur.length()==0){
             wrongFieldAlert.setContentText("Le champ prenom auteur doit être renseigné");
             wrongFieldAlert.showAndWait();
         }
-        this.prenomAuteur.set(prenomAuteur);
+        this.prenomAuteur=prenomAuteur;
     }
 
     public String getPresentation() {
-        return presentation.get();
-    }
-
-    public SimpleStringProperty presentationProperty() {
         return presentation;
     }
+
 
     public void setPresentation(String presentation) {
         if(presentation==null||presentation.length()==0){
             wrongFieldAlert.setContentText("Le champ presentation auteur doit être renseigné");
             wrongFieldAlert.showAndWait();
         }
-        this.presentation.set(presentation);
+        this.presentation=presentation;
     }
 
     public int getParution() {
-        return parution.get();
-    }
-
-    public SimpleIntegerProperty parutionProperty() {
-        return parution;
+        return this.parution;
     }
 
     public void setParution(int parution) {
-        this.parution.set(parution);
+        this.parution=parution;
     }
 
     public int getColonne() {
-        return colonne.get();
-    }
-
-    public SimpleIntegerProperty colonneProperty() {
         return colonne;
     }
 
+
+
     public void setColonne(int colonne) {
-        this.colonne.set(colonne);
+        this.colonne=colonne;
     }
 
     public int getRangee() {
-        return rangee.get();
-    }
-
-    public SimpleIntegerProperty rangeeProperty() {
         return rangee;
     }
 
+
+
     public void setRangee(int rangee) {
-        this.rangee.set(rangee);
+        this.rangee=rangee;
     }
 
     public Auteur getAuteur() {
-        return new Auteur(nomAuteur.get(), prenomAuteur.get());
+        return new Auteur(nomAuteur, prenomAuteur);
     }
 
     public void setAuteur(Auteur auteur) {
-        nomAuteur.set(auteur.getNom());
-        prenomAuteur.set(auteur.getPrenom());
+        nomAuteur=auteur.getNom();
+        prenomAuteur=auteur.getPrenom();
     }
 
 }
