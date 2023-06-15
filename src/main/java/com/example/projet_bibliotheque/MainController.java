@@ -256,7 +256,7 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Ouvre la base de donnée
+     * Permet de se connecter ou de se deconnecter de la base de donnée
      */
     @FXML
     public void handleOpenBDD() {
