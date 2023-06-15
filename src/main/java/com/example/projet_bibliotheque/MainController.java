@@ -19,6 +19,7 @@ import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 /** Controller principal de l'application. */
@@ -50,7 +51,11 @@ public class MainController implements Initializable {
      Elle affiche une boîte de dialogue d'information pour dire qu'un livre a bien été rajouté.
      */
     void handleNouveauLivre(ActionEvent event) {
+        BDD bdd = new BDD();
+        bdd.getConnection();
         Livre livre = new Livre();
+
+        //Livre livre = new Livre();
         livre.setTitre(inputTitre.getText());
         livre.setNomAuteur(inputNomAuteur.getText());
         livre.setPrenomAuteur(inputPrenomAuteur.getText());
@@ -61,6 +66,12 @@ public class MainController implements Initializable {
             livre.setRangee(Integer.parseInt(inputRangée.getText()));
 
             livres.add(livre);
+
+            try {
+                insertLivre(livre,bdd.connection);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
             tableView.setItems(livres);
         } catch (NumberFormatException e) {
@@ -270,5 +281,50 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Ajoute les informations de l'auteur en base de données
+     */
+//  public static int insertAuteurBDD(Auteur auteur, Connection connection) throws SQLException {
+//        String query = "INSERT INTO auteur (nom, prenom) VALUES (?, ?)";
+//        PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+//        statement.setString(1, auteur.getNom());
+//        statement.setString(2, auteur.getPrenom());
+//        int rowsAffected = statement.executeUpdate();
+//        int auteurId = -1;
+//        if (rowsAffected > 0) {
+//            ResultSet generatedKeys = statement.getGeneratedKeys();
+//            if (generatedKeys.next()) {
+//                auteurId = generatedKeys.getInt(1);
+//            }
+//            generatedKeys.close();
+//        }
+//        statement.close();
+//        return auteurId;
+//    }
 
+    /**
+     * Ajoute les informations du livre
+     */
+    public static int insertLivre(Livre livre, Connection connection) throws SQLException {
+        String query = "INSERT INTO livre (titre, nomAuteur, prenomAuteur, presentation, parution, colonne, rangee) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        statement.setString(1, livre.getTitre());
+        statement.setString(2, livre.getNomAuteur());
+        statement.setString(3, livre.getPrenomAuteur());
+        statement.setString(4, livre.getPresentation());
+        statement.setInt(5, livre.getParution());
+        statement.setInt(6, livre.getColonne());
+        statement.setInt(7, livre.getRangee());
+        int rowsAffected = statement.executeUpdate();
+        int livreId = -1;
+        if (rowsAffected > 0) {
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                livreId = generatedKeys.getInt(1);
+            }
+            generatedKeys.close();
+        }
+        statement.close();
+        return livreId;
+    }
 }

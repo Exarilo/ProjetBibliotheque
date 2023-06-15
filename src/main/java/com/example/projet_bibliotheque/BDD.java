@@ -22,7 +22,7 @@ public class BDD {
     public Connection getConnection() {
         if (this.connection == null){
             try {
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
                 this.connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information");
