@@ -42,6 +42,7 @@ public class MainController implements Initializable {
     @FXML private TextField inputParution;
     @FXML private TextField inputColonne;
     @FXML private TextField inputRangée;
+    @FXML private MenuItem btOuvrirBDD;
 
     @FXML
     /**
@@ -252,5 +253,16 @@ public class MainController implements Initializable {
         } catch (IOException | XMLStreamException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Ouvre la base de donnée
+     */
+    @FXML
+    public void handleOpenBDD() {
+        if(btOuvrirBDD.getText().equals("Connexion"))
+            btOuvrirBDD.setText("Deconnexion");
+        else
+            btOuvrirBDD.setText("Connexion");
     }
 }
