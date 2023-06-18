@@ -1,13 +1,14 @@
 package com.example.projet_bibliotheque;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 
 public class Main extends Application {
@@ -28,6 +29,16 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        File file= new File("C:\\Users\\Dev\\Downloads\\TestWord.docx");
+        GestionnaireWord gestionnaireWord=new GestionnaireWord();
+        try {
+            List<String> vkLines = gestionnaireWord.readLines(file);
+            gestionnaireWord.createWord(vkLines);
+
+            var b=2;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         launch();
     }
 }
