@@ -2,6 +2,7 @@ package com.example.projet_bibliotheque;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
@@ -24,7 +25,8 @@ public class GestionnaireWord {
     //Create Word
     public void createWord(List<String> lines) throws IOException {
         //Check the generated path. If it is not there, create it.
-        if (!Paths.get("./generated").toFile().exists()) Files.createDirectories(Paths.get("./generated"));
+        Path path = Paths.get("./generated");
+        if (!path.toFile().exists()) Files.createDirectories(path);
         //Create Word docs.
         for (String line : lines) {
             //Blank Document
