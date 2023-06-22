@@ -42,11 +42,11 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <VBox prefHeight="616.0" prefWidth="949.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projet_bibliotheque.MainController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
@@ -60,7 +60,7 @@
                         </ImageView>
                     </graphic>
                     <items>
-                        <MenuItem fx:id="btOuvrirBDD" text="Connexion" onAction="#handleOpenBDD" />
+                        <MenuItem fx:id="btOuvrirBDD" onAction="#handleOpenBDD" text="Connexion" />
                     </items>
                 </Menu>
 
@@ -119,6 +119,7 @@
                 <TextField fx:id="inputRangée" layoutX="723.0" layoutY="397.0" />
                 <Button layoutX="762.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleNouveauLivre" prefHeight="25.0" prefWidth="64.0" text="Valider" />
                 <Button layoutX="225.0" layoutY="410.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="Supprimer" />
+<!--                <Button layoutX="225.0" layoutY="410.0" mnemonicParsing="false" onAction="#deleteFromSQL" text="Supprimer (en base de donnée)" />-->
                 <Button layoutX="762.0" layoutY="441.0" mnemonicParsing="false" onAction="#DeleteField" prefHeight="25.0" prefWidth="64.0" text="Effacer" />
             </children>
         </AnchorPane>

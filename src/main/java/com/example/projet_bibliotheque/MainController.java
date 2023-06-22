@@ -20,11 +20,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /** Controller principal de l'application. */
 public class MainController implements Initializable {
     ObservableList<Livre> livres;
+    BDD bdd ;
     private Bibliotheque bibliotheque;
     @FXML private TableView<Livre> tableView;
     @FXML private TableColumn<Livre, String> champTitre;
@@ -51,8 +54,10 @@ public class MainController implements Initializable {
      Elle affiche une boîte de dialogue d'information pour dire qu'un livre a bien été rajouté.
      */
     void handleNouveauLivre(ActionEvent event) {
-        BDD bdd = new BDD();
-        bdd.getConnection();
+        if (this.bdd == null)
+            this.bdd = new BDD();
+        if (this.bdd.getConnection() == null)
+            this.bdd.getConnection();
         Livre livre = new Livre();
 
         //Livre livre = new Livre();
@@ -85,6 +90,8 @@ public class MainController implements Initializable {
             livre.wrongFieldAlert.showAndWait();
         }
     }
+
+
 
     @FXML
     /**
@@ -273,8 +280,11 @@ public class MainController implements Initializable {
     public void handleOpenBDD() {
         if(btOuvrirBDD.getText().equals("Connexion")) {
             btOuvrirBDD.setText("Deconnexion");
-            BDD bdd = new BDD();
-            bdd.getConnection();
+            if (this.bdd == null)
+                this.bdd = new BDD();
+            if (this.bdd.getConnection() == null)
+                this.bdd.getConnection();
+            getLivresFromDatabase();
         }
         else {
             btOuvrirBDD.setText("Connexion");
@@ -327,4 +337,113 @@ public class MainController implements Initializable {
         statement.close();
         return livreId;
     }
+
+    @FXML
+    public static void  getLivresFromDatabase(Connection connection) {
+
+    }
+
+    public void getLivresFromDatabase() {
+        if (this.bdd == null)
+            this.bdd = new BDD();
+        if (this.bdd.getConnection() == null)
+            this.bdd.getConnection();
+
+        try {
+            Statement statement = this.bdd.getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM livre");
+
+            while (resultSet.next()) {
+                Livre livre = new Livre();
+                String titre = resultSet.getString("titre");
+                String nomAuteur = resultSet.getString("nomAuteur");
+                String prenomAuteur = resultSet.getString("prenomAuteur");
+                String presentation = resultSet.getString("presentation");
+                int parution = resultSet.getInt("parution");
+                int colonne = resultSet.getInt("colonne");
+                int rangee = resultSet.getInt("rangee");
+
+                livre.setTitre(titre);
+                livre.setNomAuteur(nomAuteur);
+                livre.setPrenomAuteur(prenomAuteur);
+                livre.setPresentation(presentation);
+                livre.setParution(parution);
+                livre.setColonne(colonne);
+                livre.setRangee(rangee);
+
+                livres.add(livre);
+            }
+
+            resultSet.close();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    public void DeleteFromSQL(){
+//        if (this.bdd == null)
+//            this.bdd = new BDD();
+//        if (this.bdd.getConnection() == null)
+//            this.bdd.getConnection();
+//
+//        try {
+//            Statement statement = this.bdd.getConnection().createStatement();
+//            ResultSet resultSet = statement.executeQuery("DELETE FROM livre WHERE titre = ?");
+//            while (resultSet.next()) {
+//                Livre livre = new Livre();
+//                String titre = resultSet.getString("titre");
+//                String nomAuteur = resultSet.getString("nomAuteur");
+//                String prenomAuteur = resultSet.getString("prenomAuteur");
+//                String presentation = resultSet.getString("presentation");
+//                int parution = resultSet.getInt("parution");
+//                int colonne = resultSet.getInt("colonne");
+//                int rangee = resultSet.getInt("rangee");
+//
+//                livre.setTitre(titre);
+//                livre.setNomAuteur(nomAuteur);
+//                livre.setPrenomAuteur(prenomAuteur);
+//                livre.setPresentation(presentation);
+//                livre.setParution(parution);
+//                livre.setColonne(colonne);
+//                livre.setRangee(rangee);
+//
+//                livres.clear();
+//            }
+//
+//            resultSet.close();
+//            statement.close();
+//
+//        }
+//        catch (SQLException e){
+//            e.printStackTrace();
+//        }
+//    }
+
+//@FXML
+//    public void deleteFromSQL(ActionEvent actionEvent,Livre livre, Connection connection) {
+//        if (this.bdd == null)
+//            this.bdd = new BDD();
+//        if (this.bdd.getConnection() == null)
+//            this.bdd.getConnection();
+//
+//        try {
+//            PreparedStatement statement = connection.prepareStatement("DELETE FROM livre WHERE titre = ?");
+//            statement.setString(1,livre.getTitre());
+//
+//            int rowsAffected = statement.executeUpdate();
+//
+//            if (rowsAffected > 0) {
+//                System.out.println("Suppression réussie !");
+//            } else {
+//                System.out.println("Aucun enregistrement ne correspond au titre spécifié.");
+//            }
+//
+//            statement.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
 }

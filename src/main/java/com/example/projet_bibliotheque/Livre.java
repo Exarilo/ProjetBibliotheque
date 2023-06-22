@@ -1,6 +1,13 @@
 package com.example.projet_bibliotheque;
 import javafx.scene.control.Alert;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * La class livre gere toutes les proprietes relatives a un livre dans le XML on y retrouve
  * également de la gestion d'erreur dans les setteurs au cas ou le format n'est pas le bon
@@ -103,5 +110,7 @@ public class Livre {
         nomAuteur=auteur.getNom();
         prenomAuteur=auteur.getPrenom();
     }
+
+
 
 }
