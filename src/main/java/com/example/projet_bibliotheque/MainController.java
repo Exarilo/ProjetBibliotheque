@@ -204,9 +204,15 @@ public class MainController implements Initializable {
             tableView.getItems().remove(selectedObject);
             String query = "DELETE FROM livre WHERE titre = ?";
             PreparedStatement statement = bdd.connection.prepareStatement(query);
-            statement.setString(1, selectedObject.getTitre());
-            statement.executeUpdate();
-            statement.close();
+            try {
+
+                statement.setString(1, selectedObject.getTitre());
+                statement.executeUpdate();
+            }
+            catch (Exception e){}
+            finally {
+                statement.close();
+            }
         }
     }
 
@@ -263,6 +269,10 @@ public class MainController implements Initializable {
         }
         else {
             btOuvrirBDD.setText("Connexion");
+            if (this.bdd != null)
+                this.bdd.closeConnection();
+            bibliotheque.livres.clear();
+            livres.clear();
         }
     }
 

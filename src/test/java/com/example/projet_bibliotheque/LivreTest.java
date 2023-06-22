@@ -109,7 +109,9 @@ class LivreTest {
         Livre livre = new Livre();
         livre.setNomAuteur("Nom de l'auteur");
         livre.setPrenomAuteur("Prénom de l'auteur");
-        assertEquals("Nom de l'auteur Prénom de l'auteur", livre.getAuteur());
+
+        assertEquals(livre.getNomAuteur(), livre.getAuteur().getNom());
+        assertEquals(livre.getPrenomAuteur(), livre.getAuteur().getPrenom());
     }
 
     @Test
