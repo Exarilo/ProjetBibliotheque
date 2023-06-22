@@ -46,6 +46,8 @@ public class MainController implements Initializable {
     @FXML private TextField inputColonne;
     @FXML private TextField inputRangée;
     @FXML private MenuItem btOuvrirBDD;
+    @FXML private Label labelConnection;
+
     @FXML private Button deleteSQL;
 
     @FXML
@@ -258,6 +260,7 @@ public class MainController implements Initializable {
     @FXML
     public void handleOpenBDD() {
         if(btOuvrirBDD.getText().equals("Connexion")) {
+            labelConnection.setText("Vous êtes actuellement connecté");
             btOuvrirBDD.setText("Deconnexion");
             if (this.bdd == null)
                 this.bdd = new BDD();
@@ -268,6 +271,7 @@ public class MainController implements Initializable {
             getLivresFromDatabase();
         }
         else {
+            labelConnection.setText("Vous êtes actuellement deconnecté");
             btOuvrirBDD.setText("Connexion");
             if (this.bdd != null)
                 this.bdd.closeConnection();

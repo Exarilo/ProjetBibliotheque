@@ -42,12 +42,18 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="616.0" prefWidth="949.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projet_bibliotheque.MainController">
+<VBox prefHeight="616.0" prefWidth="949.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projet_bibliotheque.MainController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -124,9 +130,42 @@
                 <TextField fx:id="inputColonne" layoutX="723.0" layoutY="335.0" />
                 <TextField fx:id="inputRangée" layoutX="723.0" layoutY="397.0" />
                 <Button layoutX="762.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleNouveauLivre" prefHeight="25.0" prefWidth="64.0" text="Valider" />
-                <Button layoutX="225.0" layoutY="410.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="Supprimer" />
+                <Button layoutX="240.0" layoutY="478.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="Supprimer" />
 <!--                <Button  fx:id="deleteSQL" layoutX="225.0" layoutY="410.0" mnemonicParsing="false"  text="Supprimer (en base de donnée)" />-->
                 <Button layoutX="762.0" layoutY="441.0" mnemonicParsing="false" onAction="#DeleteField" prefHeight="25.0" prefWidth="64.0" text="Effacer" />
+            <Label fx:id="labelConnection" layoutX="114.0" layoutY="407.0" prefHeight="31.0" prefWidth="340.0" text="Vous êtes actuellement deconnecté">
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <textFill>
+                  <LinearGradient endX="1.0" endY="0.6682464454976303" startX="1.0" startY="0.6208530805687205">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.2083333283662796" green="1.0" blue="0.2874999940395355" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.006711409395973154">
+                           <color>
+                              <Color />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <effect>
+                  <Blend>
+                     <topInput>
+                        <ColorAdjust brightness="-0.48" />
+                     </topInput>
+                  </Blend>
+               </effect>
+            </Label>
             </children>
         </AnchorPane>
     </children>
