@@ -175,17 +175,23 @@ public class MainController implements Initializable {
             }
         });
     }
-    public void DeleteField(){
-                inputTitre.setText("");
-                inputNomAuteur.setText("");
-                inputPrenomAuteur.setText("");
-                inputPresentation.setText("");
-                inputParution.setText("");
-                inputColonne.setText("");
-                inputRangée.setText("");
 
+    /**
+     * Permet reinitialiser les champs disponible sur la droite de l'ecran
+     */
+    public void DeleteField(){
+       inputTitre.setText("");
+       inputNomAuteur.setText("");
+       inputPrenomAuteur.setText("");
+       inputPresentation.setText("");
+       inputParution.setText("");
+       inputColonne.setText("");
+       inputRangée.setText("");
     }
 
+    /**
+     * Permet de supprimer les lignes dans le tableau / également en BDD en mode connecté
+     */
     @FXML
     public void deleteSelectedRow(ActionEvent event) throws SQLException {
         if (this.bdd == null)
@@ -260,6 +266,9 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Permet de sauvegarder les livres de la bibliotheque en Docx
+     */
     @FXML
     public void handleSauvegarderWordMenuItemAction(ActionEvent event){
         try {
@@ -276,6 +285,10 @@ public class MainController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Permet de sauvegarder les livres de la bibliotheque en PDF
+     */
     @FXML
     public void handleSauvegarderPDFMenuItemAction(ActionEvent event){
         try {
@@ -294,7 +307,7 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Ajoute les informations du livre
+     * Ajoute les informations du livre dans la BDD
      */
     public static int insertLivre(Livre livre, Connection connection) throws SQLException {
         String query = "INSERT INTO livre (titre, nomAuteur, prenomAuteur, presentation, parution, colonne, rangee) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -319,6 +332,9 @@ public class MainController implements Initializable {
         return livreId;
     }
 
+    /**
+     * *Recupere les livres disponibles dans la BDD
+     */
     public void getLivresFromDatabase() {
         if (this.bdd == null)
             this.bdd = new BDD();
