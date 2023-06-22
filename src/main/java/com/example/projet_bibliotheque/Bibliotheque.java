@@ -38,7 +38,7 @@ public class Bibliotheque {
         indentationDictionary.put("rangee", 1);
     }
 
-    public List<Livre> livre;
+    public List<Livre> livres;
     /**
      * La class Bibliotheque permet de stocker tout se qui concerne les livres et leur gestion
      * Elle possede deux constructeurs. Le constructeur sans parametre sert a initialiser
@@ -47,10 +47,10 @@ public class Bibliotheque {
      * Celle avec paramettre permet de charger les livres depuis le chemin d'un fichier XML
      */
     public Bibliotheque()  {
-        this.livre  =new ArrayList<>();
+        this.livres  =new ArrayList<>();
     }
     public Bibliotheque(String path) throws XMLStreamException, IOException {
-        this.livre  =new ArrayList<>();
+        this.livres  =new ArrayList<>();
         this.path=path;
         LoadXML(path);
     }
@@ -101,7 +101,7 @@ public class Bibliotheque {
                         } else if (event == XMLStreamConstants.END_ELEMENT && reader.getLocalName().equals("livre"))
                             break;
                     }
-                    this.livre.add(livre);
+                    this.livres.add(livre);
                 }
             }
         }
@@ -124,7 +124,7 @@ public class Bibliotheque {
         indent(writer, "bibliotheque");
         writer.writeStartElement("bibliotheque");
 
-        for (Livre livre : livre) {
+        for (Livre livre : livres) {
             indent(writer, "livre");
             writer.writeCharacters("\n");
             writer.writeStartElement("livre");
@@ -210,7 +210,7 @@ public class Bibliotheque {
 
     public void toDocx(String savingPath) throws Exception {
         try (XWPFDocument doc = new XWPFDocument()) {
-            for (Livre livre : livre) {
+            for (Livre livre : livres) {
                 XWPFParagraph p = doc.createParagraph();
 
                 // Titre du livre
@@ -259,7 +259,7 @@ public class Bibliotheque {
                 contentStream.newLineAtOffset(100, 700);
                 contentStream.setLeading(14.5f);
 
-                for (Livre livre : livre) {
+                for (Livre livre : livres) {
                     contentStream.showText("Titre: " + livre.getTitre());
                     contentStream.newLineAtOffset(0, -15);
 

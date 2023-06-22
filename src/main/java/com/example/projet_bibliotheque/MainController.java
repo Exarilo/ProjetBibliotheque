@@ -54,10 +54,6 @@ public class MainController implements Initializable {
      Elle affiche une boîte de dialogue d'information pour dire qu'un livre a bien été rajouté.
      */
     void handleNouveauLivre(ActionEvent event) {
-        if (this.bdd == null)
-            this.bdd = new BDD();
-        if (this.bdd.getConnection() == null)
-            this.bdd.getConnection();
         Livre livre = new Livre();
 
         //Livre livre = new Livre();
@@ -73,6 +69,10 @@ public class MainController implements Initializable {
             livres.add(livre);
 
             try {
+                if (this.bdd == null)
+                    this.bdd = new BDD();
+                if (!this.bdd.isConnected)
+                    this.bdd.CreateConnection();
                 insertLivre(livre,bdd.connection);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -212,7 +212,6 @@ public class MainController implements Initializable {
     }
 
     public void handleSupprimer(ActionEvent event){
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText(null);
@@ -235,14 +234,14 @@ public class MainController implements Initializable {
     public void deleteSelectedRow(ActionEvent event) throws SQLException {
         if (this.bdd == null)
             this.bdd = new BDD();
-        if (this.bdd.getConnection() == null)
-            this.bdd.getConnection();
+        if (!this.bdd.isConnected)
+            this.bdd.CreateConnection();
         Livre selectedObject = tableView.getSelectionModel().getSelectedItem();
 
         if (selectedObject != null) {
             tableView.getItems().remove(selectedObject);
             String query = "DELETE FROM livre WHERE titre = ?";
-            PreparedStatement statement = bdd.getConnection().prepareStatement(query);
+            PreparedStatement statement = bdd.connection.prepareStatement(query);
             statement.setString(1, selectedObject.getTitre());
             statement.executeUpdate();
             statement.close();
@@ -294,8 +293,10 @@ public class MainController implements Initializable {
             btOuvrirBDD.setText("Deconnexion");
             if (this.bdd == null)
                 this.bdd = new BDD();
-            if (this.bdd.getConnection() == null)
-                this.bdd.getConnection();
+            if (!this.bdd.isConnected)
+                this.bdd.CreateConnection();
+            bibliotheque.livre.clear();
+            livres.clear();
             getLivresFromDatabase();
         }
         else {
@@ -385,19 +386,14 @@ public class MainController implements Initializable {
         return livreId;
     }
 
-    @FXML
-    public static void  getLivresFromDatabase(Connection connection) {
-
-    }
-
     public void getLivresFromDatabase() {
         if (this.bdd == null)
             this.bdd = new BDD();
-        if (this.bdd.getConnection() == null)
-            this.bdd.getConnection();
+        if (!this.bdd.isConnected)
+            this.bdd.CreateConnection();
 
         try {
-            Statement statement = this.bdd.getConnection().createStatement();
+            Statement statement = this.bdd.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM livre");
 
             while (resultSet.next()) {
