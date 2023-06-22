@@ -15,13 +15,29 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
 import java.io.FileWriter;
+import java.util.Map;
 
 public class Bibliotheque {
     public String path;
+    private static final Map<String, Integer> indentationDictionary = new HashMap<>();
+    static {
+        indentationDictionary.put("bibliotheque", 0);
+        indentationDictionary.put("livre", 0);
+        indentationDictionary.put("titre", 1);
+        indentationDictionary.put("auteur", 1);
+        indentationDictionary.put("nom", 2);
+        indentationDictionary.put("prenom", 2);
+        indentationDictionary.put("presentation", 1);
+        indentationDictionary.put("parution", 1);
+        indentationDictionary.put("colonne", 1);
+        indentationDictionary.put("rangee", 1);
+    }
+
     public List<Livre> livre;
     /**
      * La class Bibliotheque permet de stocker tout se qui concerne les livres et leur gestion
@@ -102,47 +118,73 @@ public class Bibliotheque {
         XMLStreamWriter writer = factory.createXMLStreamWriter(new FileWriter(savingPath));
 
         writer.writeStartDocument("1.0");
+        writer.writeCharacters("\n");
+        writer.writeComment(" fichier livre.xml ");
+        writer.writeCharacters("\n");
+        indent(writer, "bibliotheque");
         writer.writeStartElement("bibliotheque");
 
-
         for (Livre livre : livre) {
+            indent(writer, "livre");
+            writer.writeCharacters("\n");
             writer.writeStartElement("livre");
+            writer.writeCharacters("\n");
 
+            indent(writer, "titre");
             writer.writeStartElement("titre");
             writer.writeCharacters(livre.getTitre());
             writer.writeEndElement();
+            writer.writeCharacters("\n");
 
+            indent(writer, "auteur");
             writer.writeStartElement("auteur");
+            writer.writeCharacters("\n");
 
+            indent(writer, "nom");
             writer.writeStartElement("nom");
             writer.writeCharacters(livre.getNomAuteur());
             writer.writeEndElement();
+            writer.writeCharacters("\n");
 
+            indent(writer, "prenom");
             writer.writeStartElement("prenom");
             writer.writeCharacters(livre.getPrenomAuteur());
             writer.writeEndElement();
+            writer.writeCharacters("\n");
 
+            indent(writer, "auteur");
             writer.writeEndElement();
+            writer.writeCharacters("\n");
 
+            indent(writer, "presentation");
             writer.writeStartElement("presentation");
             writer.writeCharacters(livre.getPresentation());
             writer.writeEndElement();
+            writer.writeCharacters("\n");
 
+            indent(writer, "parution");
             writer.writeStartElement("parution");
             writer.writeCharacters(String.valueOf(livre.getParution()));
             writer.writeEndElement();
+            writer.writeCharacters("\n");
 
+            indent(writer, "colonne");
             writer.writeStartElement("colonne");
             writer.writeCharacters(String.valueOf(livre.getColonne()));
             writer.writeEndElement();
+            writer.writeCharacters("\n");
 
+            indent(writer, "rangee");
             writer.writeStartElement("rangee");
             writer.writeCharacters(String.valueOf(livre.getRangee()));
             writer.writeEndElement();
 
+            indent(writer, "livre");
+            writer.writeCharacters("\n");
             writer.writeEndElement();
         }
-
+        writer.writeCharacters("\n");
+        indent(writer, "bibliotheque");
         writer.writeEndElement();
         writer.writeEndDocument();
 
@@ -150,6 +192,20 @@ public class Bibliotheque {
         writer.close();
     }
 
+    // Méthode utilitaire pour l'indentation
+    private void indent(XMLStreamWriter writer, String elementName) throws XMLStreamException {
+        int indentLevel = indentationDictionary.get(elementName);
+        String indentation = getIndentation(indentLevel);
+        writer.writeCharacters(indentation);
+    }
+
+    private String getIndentation(int indentLevel) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < indentLevel; i++) {
+            sb.append("  ");
+        }
+        return sb.toString();
+    }
 
 
     public void toDocx(String savingPath) throws Exception {
@@ -222,12 +278,9 @@ public class Bibliotheque {
 
                 contentStream.endText();
             }
-
             pdfDoc.save(savingPath);
         }
     }
-
-
 }
 
 
