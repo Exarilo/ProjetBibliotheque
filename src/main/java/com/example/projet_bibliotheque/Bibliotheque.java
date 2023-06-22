@@ -1,10 +1,18 @@
 package com.example.projet_bibliotheque;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.poi.xwpf.usermodel.*;
+
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -141,6 +149,84 @@ public class Bibliotheque {
         writer.flush();
         writer.close();
     }
+
+
+
+    public void toDocx(String savingPath) throws Exception {
+        try (XWPFDocument doc = new XWPFDocument()) {
+            for (Livre livre : livre) {
+                XWPFParagraph p = doc.createParagraph();
+
+                // Titre du livre
+                XWPFRun r1 = p.createRun();
+                r1.setBold(true);
+                r1.setText(livre.getTitre());
+                r1.addCarriageReturn();
+
+                // Auteur du livre
+                XWPFRun r2 = p.createRun();
+                r2.setText("Auteur: " + livre.getNomAuteur() + " " + livre.getPrenomAuteur());
+                r2.addCarriageReturn();
+
+                // Présentation du livre
+                XWPFRun r3 = p.createRun();
+                r3.setText("Présentation: " + livre.getPresentation());
+                r3.addCarriageReturn();
+
+                // Parution du livre
+                XWPFRun r4 = p.createRun();
+                r4.setText("Parution: " + livre.getParution());
+                r4.addCarriageReturn();
+
+                // Position du livre
+                XWPFRun r5 = p.createRun();
+                r5.setText("Position: Colonne " + livre.getColonne() + ", Rangée " + livre.getRangee());
+                r5.addCarriageReturn();
+
+                doc.createParagraph().setPageBreak(true);
+            }
+
+            try (FileOutputStream out = new FileOutputStream(savingPath)) {
+                doc.write(out);
+            }
+        }
+    }
+
+    public void toPDF(String savingPath) throws Exception {
+        try (PDDocument pdfDoc = new PDDocument()) {
+            PDPage page = new PDPage(PDRectangle.A4);
+            pdfDoc.addPage(page);
+
+            try (PDPageContentStream contentStream = new PDPageContentStream(pdfDoc, page, PDPageContentStream.AppendMode.APPEND, false)) {
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                contentStream.beginText();
+                contentStream.newLineAtOffset(100, 700);
+                contentStream.setLeading(14.5f);
+
+                for (Livre livre : livre) {
+                    contentStream.showText("Titre: " + livre.getTitre());
+                    contentStream.newLineAtOffset(0, -15);
+
+                    contentStream.showText("Auteur: " + livre.getNomAuteur() + " " + livre.getPrenomAuteur());
+                    contentStream.newLineAtOffset(0, -15);
+
+                    contentStream.showText("Présentation: " + livre.getPresentation());
+                    contentStream.newLineAtOffset(0, -15);
+
+                    contentStream.showText("Parution: " + livre.getParution());
+                    contentStream.newLineAtOffset(0, -15);
+
+                    contentStream.showText("Position: Colonne " + livre.getColonne() + ", Rangée " + livre.getRangee());
+                    contentStream.newLineAtOffset(0, -15);
+                }
+
+                contentStream.endText();
+            }
+
+            pdfDoc.save(savingPath);
+        }
+    }
+
 
 }
 

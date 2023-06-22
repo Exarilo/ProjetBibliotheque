@@ -291,6 +291,41 @@ public class MainController implements Initializable {
         }
     }
 
+    @FXML
+    public void handleSauvegarderWordMenuItemAction(ActionEvent event){
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save Docx File");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Docx files", "*.docx"));
+
+            File selectedFile = fileChooser.showSaveDialog(null);
+
+            if (selectedFile != null) {
+                bibliotheque.toDocx(selectedFile.getPath());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    public void handleSauvegarderPDFMenuItemAction(ActionEvent event){
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Save PDF File");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF files", "*.pdf"));
+
+            File selectedFile = fileChooser.showSaveDialog(null);
+
+            if (selectedFile != null) {
+                bibliotheque.toPDF(selectedFile.getPath());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
     /**
      * Ajoute les informations de l'auteur en base de données
      */

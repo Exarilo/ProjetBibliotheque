@@ -76,6 +76,12 @@
                         <MenuItem mnemonicParsing="false" onAction="#handleSauvegarderSousMenuItemAction" text="Sauvegarder sous..." />
                     </items>
                 </Menu>
+                <Menu mnemonicParsing="false" text="Export">
+                    <items>
+                        <MenuItem fx:id="sauvegarderWord" mnemonicParsing="false" onAction="#handleSauvegarderWordMenuItemAction" text="Docx" />
+                        <MenuItem fx:id="sauvegarderPDF" mnemonicParsing="false" onAction="#handleSauvegarderPDFMenuItemAction" text="PDF" />
+                    </items>
+                </Menu>
                 <Menu mnemonicParsing="false" text="About">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#handleInfosMenuItemAction" text="Infos" />

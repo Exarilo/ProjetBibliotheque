@@ -26,11 +26,11 @@ public class GestionnaireWord {
     public void createWord(List<String> lines) throws IOException {
         //Check the generated path. If it is not there, create it.
         Path path = Paths.get("./generated");
+        XWPFDocument document = new XWPFDocument();
         if (!path.toFile().exists()) Files.createDirectories(path);
         //Create Word docs.
         for (String line : lines) {
             //Blank Document
-            XWPFDocument document = new XWPFDocument();
             //Write the Document in file system
             FileOutputStream out = new FileOutputStream("generated/" + "createdWord" + "_" + line + ".docx");
             //create Paragraph
