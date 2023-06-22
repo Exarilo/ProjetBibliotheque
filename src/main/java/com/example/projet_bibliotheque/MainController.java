@@ -56,7 +56,6 @@ public class MainController implements Initializable {
     void handleNouveauLivre(ActionEvent event) {
         Livre livre = new Livre();
 
-        //Livre livre = new Livre();
         livre.setTitre(inputTitre.getText());
         livre.setNomAuteur(inputNomAuteur.getText());
         livre.setPrenomAuteur(inputPrenomAuteur.getText());
@@ -108,22 +107,9 @@ public class MainController implements Initializable {
 
         if (selectedFile != null){
             bibliotheque = new Bibliotheque(selectedFile.getPath());
-            tableView.getItems().addAll(bibliotheque.livre);
-            livres = FXCollections.observableList(bibliotheque.livre);
+            tableView.getItems().addAll(bibliotheque.livres);
+            livres = FXCollections.observableList(bibliotheque.livres);
             tableView.setItems(livres);
-//            tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-//                if (newValue != null) {
-//
-//                    /*
-//                    champTitre.setCellValueFactory(new PropertyValueFactory<Livre, String>("titre"));
-//                    champNomAuteur.setText(newValue.auteur.nom);
-//                    champPrenomAuteur.setText(newValue.auteur.prenom);
-//                    champPresentation.setText(newValue.presentation);
-//                    champParution.setText(Integer.toString(newValue.parution));
-//                    champColonne.setText(Integer.toString(newValue.colonne));
-//                    champRangee.setText(Integer.toString(newValue.rangee));*/
-//                }
-//            });
         }
     }
     @FXML
@@ -153,27 +139,6 @@ public class MainController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    /**
-     * Crée un nouveau livre.
-     */
-    @FXML
-    protected void creerLivre() {
-        tableView.getSelectionModel().clearSelection();
-        //clearChamps();
-    }
-
-    /**
-     * Efface le contenu des champs de saisie
-     */
-    private void clearChamps() {
-        champTitre.setText("");
-        champNomAuteur.setText("");
-        champPrenomAuteur.setText("");
-        champPresentation.setText("");
-        champParution.setText("");
-        champColonne.setText("");
-        champRangee.setText("");
-    }
 
     /**
      * initialise les champs necessaire a l'IHM a la creation
@@ -189,7 +154,7 @@ public class MainController implements Initializable {
         champColonne.setCellValueFactory(new PropertyValueFactory<>("colonne"));
         champRangee.setCellValueFactory(new PropertyValueFactory<>("rangee"));
         bibliotheque= new Bibliotheque();
-        livres = FXCollections.observableList(bibliotheque.livre);
+        livres = FXCollections.observableList(bibliotheque.livres);
         tableView.setItems(livres);
         Register();
 //       deleteSQL.setOnAction(deleteFromSQL());
@@ -210,15 +175,6 @@ public class MainController implements Initializable {
             }
         });
     }
-
-    public void handleSupprimer(ActionEvent event){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText("Livre supprimé");
-        alert.showAndWait();
-    }
-
     public void DeleteField(){
                 inputTitre.setText("");
                 inputNomAuteur.setText("");
@@ -295,7 +251,7 @@ public class MainController implements Initializable {
                 this.bdd = new BDD();
             if (!this.bdd.isConnected)
                 this.bdd.CreateConnection();
-            bibliotheque.livre.clear();
+            bibliotheque.livres.clear();
             livres.clear();
             getLivresFromDatabase();
         }
@@ -336,29 +292,6 @@ public class MainController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
-
-
-    /**
-     * Ajoute les informations de l'auteur en base de données
-     */
-//  public static int insertAuteurBDD(Auteur auteur, Connection connection) throws SQLException {
-//        String query = "INSERT INTO auteur (nom, prenom) VALUES (?, ?)";
-//        PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-//        statement.setString(1, auteur.getNom());
-//        statement.setString(2, auteur.getPrenom());
-//        int rowsAffected = statement.executeUpdate();
-//        int auteurId = -1;
-//        if (rowsAffected > 0) {
-//            ResultSet generatedKeys = statement.getGeneratedKeys();
-//            if (generatedKeys.next()) {
-//                auteurId = generatedKeys.getInt(1);
-//            }
-//            generatedKeys.close();
-//        }
-//        statement.close();
-//        return auteurId;
-//    }
 
     /**
      * Ajoute les informations du livre
@@ -423,66 +356,4 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
-
-//    public void DeleteFromSQL(){
-//        if (this.bdd == null)
-//            this.bdd = new BDD();
-//        if (this.bdd.getConnection() == null)
-//            this.bdd.getConnection();
-//
-//        try {
-//            Statement statement = this.bdd.getConnection().createStatement();
-//            ResultSet resultSet = statement.executeQuery("DELETE FROM livre WHERE titre = ?");
-//            while (resultSet.next()) {
-//                Livre livre = new Livre();
-//                String titre = resultSet.getString("titre");
-//                String nomAuteur = resultSet.getString("nomAuteur");
-//                String prenomAuteur = resultSet.getString("prenomAuteur");
-//                String presentation = resultSet.getString("presentation");
-//                int parution = resultSet.getInt("parution");
-//                int colonne = resultSet.getInt("colonne");
-//                int rangee = resultSet.getInt("rangee");
-//
-//                livre.setTitre(titre);
-//                livre.setNomAuteur(nomAuteur);
-//                livre.setPrenomAuteur(prenomAuteur);
-//                livre.setPresentation(presentation);
-//                livre.setParution(parution);
-//                livre.setColonne(colonne);
-//                livre.setRangee(rangee);
-//
-//                livres.clear();
-//            }
-//
-//            resultSet.close();
-//            statement.close();
-//
-//        }
-//        catch (SQLException e){
-//            e.printStackTrace();
-//        }
-//    }
-
-
-//    public EventHandler<ActionEvent> deleteFromSQL() {
-//        if (this.bdd == null)
-//            this.bdd = new BDD();
-//        if (this.bdd.getConnection() == null)
-//            this.bdd.getConnection();
-//
-//        try {
-//            Livre selectedObject = tableView.getSelectionModel().getSelectedItem();
-//            if (selectedObject != null) {
-//                tableView.getItems().remove(selectedObject);
-//                bdd.getConnection().prepareStatement("DELETE FROM livre WHERE titre = ?");
-//            }
-//
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
-
 }
