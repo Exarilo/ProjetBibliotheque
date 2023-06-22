@@ -125,7 +125,7 @@
                 <TextField fx:id="inputRangée" layoutX="723.0" layoutY="397.0" />
                 <Button layoutX="762.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleNouveauLivre" prefHeight="25.0" prefWidth="64.0" text="Valider" />
                 <Button layoutX="225.0" layoutY="410.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="Supprimer" />
-<!--                <Button layoutX="225.0" layoutY="410.0" mnemonicParsing="false" onAction="#deleteFromSQL" text="Supprimer (en base de donnée)" />-->
+<!--                <Button  fx:id="deleteSQL" layoutX="225.0" layoutY="410.0" mnemonicParsing="false"  text="Supprimer (en base de donnée)" />-->
                 <Button layoutX="762.0" layoutY="441.0" mnemonicParsing="false" onAction="#DeleteField" prefHeight="25.0" prefWidth="64.0" text="Effacer" />
             </children>
         </AnchorPane>

@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -20,8 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /** Controller principal de l'application. */
@@ -47,6 +46,7 @@ public class MainController implements Initializable {
     @FXML private TextField inputColonne;
     @FXML private TextField inputRangée;
     @FXML private MenuItem btOuvrirBDD;
+    @FXML private Button deleteSQL;
 
     @FXML
     /**
@@ -192,6 +192,7 @@ public class MainController implements Initializable {
         livres = FXCollections.observableList(bibliotheque.livre);
         tableView.setItems(livres);
         Register();
+//       deleteSQL.setOnAction(deleteFromSQL());
     }
     /**
      *permet sur le clique dans le tableau de reseigner les champs sur la droite de l'IHM
@@ -231,12 +232,23 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void deleteSelectedRow(ActionEvent event) {
+    public void deleteSelectedRow(ActionEvent event) throws SQLException {
+        if (this.bdd == null)
+            this.bdd = new BDD();
+        if (this.bdd.getConnection() == null)
+            this.bdd.getConnection();
         Livre selectedObject = tableView.getSelectionModel().getSelectedItem();
+
         if (selectedObject != null) {
             tableView.getItems().remove(selectedObject);
+            String query = "DELETE FROM livre WHERE titre = ?";
+            PreparedStatement statement = bdd.getConnection().prepareStatement(query);
+            statement.setString(1, selectedObject.getTitre());
+            statement.executeUpdate();
+            statement.close();
         }
     }
+
 
     /**
      * Permet de sauvegarder le fichier ouvert
@@ -455,29 +467,25 @@ public class MainController implements Initializable {
 //        }
 //    }
 
-//@FXML
-//    public void deleteFromSQL(ActionEvent actionEvent,Livre livre, Connection connection) {
+
+//    public EventHandler<ActionEvent> deleteFromSQL() {
 //        if (this.bdd == null)
 //            this.bdd = new BDD();
 //        if (this.bdd.getConnection() == null)
 //            this.bdd.getConnection();
 //
 //        try {
-//            PreparedStatement statement = connection.prepareStatement("DELETE FROM livre WHERE titre = ?");
-//            statement.setString(1,livre.getTitre());
-//
-//            int rowsAffected = statement.executeUpdate();
-//
-//            if (rowsAffected > 0) {
-//                System.out.println("Suppression réussie !");
-//            } else {
-//                System.out.println("Aucun enregistrement ne correspond au titre spécifié.");
+//            Livre selectedObject = tableView.getSelectionModel().getSelectedItem();
+//            if (selectedObject != null) {
+//                tableView.getItems().remove(selectedObject);
+//                bdd.getConnection().prepareStatement("DELETE FROM livre WHERE titre = ?");
 //            }
 //
-//            statement.close();
+//
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
+//        return null;
 //    }
 
 
