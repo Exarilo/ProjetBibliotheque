@@ -1,4 +1,5 @@
-package com.example.projet_bibliotheque;
+package com.example.projet_bibliotheque.Model;
+import com.example.projet_bibliotheque.Model.Auteur;
 import javafx.scene.control.Alert;
 
 /**

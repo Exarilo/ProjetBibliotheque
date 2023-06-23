@@ -1,6 +1,6 @@
-package com.example.projet_bibliotheque;
+package com.example.projet_bibliotheque.Controller;
 
-import javafx.collections.FXCollections;
+import com.example.projet_bibliotheque.Vue.MainApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,13 +8,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -31,9 +29,10 @@ public class ConnexionController implements Initializable  {
     @FXML private TextField fieldUsername;
     @FXML private PasswordField fieldPassword;
 
-
     /**
-     * Permet d'initialiser les utilisateurs valides
+     *
+     * @param url
+     * @param resourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -109,7 +108,7 @@ public class ConnexionController implements Initializable  {
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Stage newStage = new Stage();
 
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
                 Parent root = fxmlLoader.load();
 
                 Scene newScene = new Scene(root, 950, 600);

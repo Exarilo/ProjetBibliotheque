@@ -1,5 +1,7 @@
 package com.example.projet_bibliotheque;
 
+import com.example.projet_bibliotheque.Model.Auteur;
+import com.example.projet_bibliotheque.Model.Livre;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

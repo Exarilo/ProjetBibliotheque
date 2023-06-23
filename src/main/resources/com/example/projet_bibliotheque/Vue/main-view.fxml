@@ -53,7 +53,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="616.0" prefWidth="949.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projet_bibliotheque.MainController">
+<VBox prefHeight="616.0" prefWidth="949.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projet_bibliotheque.Controller.MainController">
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>

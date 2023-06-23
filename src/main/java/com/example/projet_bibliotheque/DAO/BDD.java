@@ -1,4 +1,4 @@
-package com.example.projet_bibliotheque;
+package com.example.projet_bibliotheque.DAO;
 import javafx.scene.control.Alert;
 
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
  * Elle gere tout ce qui est connection avec le sql
  */
 public class BDD {
-    Connection connection;
+    public Connection connection;
     private String DB_URL = "jdbc:mysql://localhost:3306/biblio";
     private String DB_USER = "root";
     private String DB_PASSWORD = "";

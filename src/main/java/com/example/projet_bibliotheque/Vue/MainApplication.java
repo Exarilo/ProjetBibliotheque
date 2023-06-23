@@ -1,4 +1,4 @@
-package com.example.projet_bibliotheque;
+package com.example.projet_bibliotheque.Vue;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * La class Main est le corp du projet elle sert a lancer l'application
  */
-public class Main extends Application {
+public class MainApplication extends Application {
     @Override
     /**
      * La methode start est le point d'entré de l'application. elle vient construire l'IHM en se
@@ -19,7 +19,7 @@ public class Main extends Application {
      */
 
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("connexion-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("connexion-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Bibliotheque");
         stage.setResizable(false);

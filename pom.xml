@@ -105,7 +105,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.projet_bibliotheque/com.example.projet_bibliotheque.Main
+                                com.example.projet_bibliotheque/com.example.projet_bibliotheque.Vue.MainApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

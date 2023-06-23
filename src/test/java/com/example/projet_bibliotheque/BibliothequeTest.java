@@ -1,15 +1,11 @@
 package com.example.projet_bibliotheque;
+import com.example.projet_bibliotheque.Model.Bibliotheque;
+import com.example.projet_bibliotheque.Model.Livre;
 import org.junit.jupiter.api.Test;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.junit.jupiter.api.Test;
+import javax.xml.stream.XMLStreamException;
+import java.io.IOException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 class BibliothequeTest {

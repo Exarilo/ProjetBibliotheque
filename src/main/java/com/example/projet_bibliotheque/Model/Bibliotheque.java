@@ -1,4 +1,4 @@
-package com.example.projet_bibliotheque;
+package com.example.projet_bibliotheque.Model;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
