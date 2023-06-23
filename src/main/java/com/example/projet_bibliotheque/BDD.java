@@ -10,7 +10,6 @@ import java.sql.SQLException;
  * Elle gere tout ce qui est connection avec le sql
  */
 public class BDD {
-
     Connection connection;
     private String DB_URL = "jdbc:mysql://localhost:3306/biblio";
     private String DB_USER = "root";

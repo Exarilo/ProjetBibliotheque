@@ -19,7 +19,9 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
-
+/**
+ * Controller permettant de gerer les acces users (connexion/inscription)
+ */
 public class ConnexionController implements Initializable  {
     private Map<String, String> validUsers = new HashMap<String, String>();
 
@@ -61,7 +63,7 @@ public class ConnexionController implements Initializable  {
     void handleValider(ActionEvent event) throws IOException {
         if(labelConnexionInscription.getText() =="Inscription")
         {
-            if(fieldUsername.getText()==""||fieldPassword.getText()==""){
+            if(fieldUsername.getText().equals("")||fieldPassword.getText().equals("")){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setHeaderText(null);
@@ -78,6 +80,14 @@ public class ConnexionController implements Initializable  {
         }
         else
         {
+            if(fieldUsername.getText().equals("")||fieldPassword.getText().equals("")){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("Le nom de compte ou mot de passe n'existe pas");
+                alert.showAndWait();
+                return;
+            }
             if(validUsers.get(fieldUsername.getText()).equals(fieldPassword.getText())){
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Stage newStage = new Stage();
