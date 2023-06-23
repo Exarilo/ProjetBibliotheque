@@ -8,20 +8,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projet_bibliotheque.ConnexionController">  <children>
       <AnchorPane prefHeight="405.0" prefWidth="600.0">
          <children>
-            <Label layoutX="224.0" layoutY="25.0" text="Connexion">
+            <Label fx:id="labelConnexionInscription" layoutX="224.0" layoutY="25.0" text="Connexion">
                <font>
                   <Font size="30.0" />
                </font>
             </Label>
-            <TextField layoutX="220.0" layoutY="141.0" />
-            <PasswordField layoutX="221.0" layoutY="224.0" />
-            <Button layoutX="249.0" layoutY="300.0" mnemonicParsing="false" text="Se connecter" />
-            <Label layoutX="241.0" layoutY="98.0" text="Adresse mail">
+            <TextField fx:id="fieldUsername"  layoutX="220.0" layoutY="141.0" />
+            <PasswordField fx:id="fieldPassword"  layoutX="221.0" layoutY="224.0" />
+            <Button fx:id="btValider" onAction="#handleValider" layoutX="233.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" text="Valider" />
+            <Label layoutX="251.0" layoutY="98.0" text="Username">
                <font>
                   <Font size="18.0" />
                </font>
@@ -31,9 +29,9 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="238.0" layoutY="261.0" text="Mot de passe oublié" textFill="#0414f2" />
-            <Button layoutX="249.0" layoutY="337.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="S'incrire" />
-         </children>
+            <Label fx:id="btMdpOublie" layoutX="238.0" layoutY="261.0" onMouseClicked="#handleOublieMDP" text="Mot de passe oublié" textFill="#0414f2" />
+            <Button fx:id="btInscription" layoutX="234.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleInscription" prefHeight="25.0" prefWidth="130.0" text="S'incrire" />
+          </children>
       </AnchorPane>
    </children>
 </VBox>
