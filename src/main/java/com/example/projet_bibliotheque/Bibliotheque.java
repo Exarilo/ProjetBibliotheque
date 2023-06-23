@@ -22,6 +22,10 @@ import javax.xml.stream.XMLStreamWriter;
 import java.io.FileWriter;
 import java.util.Map;
 
+/**
+ * La class Bibliotheque contient une liste de livres
+ * Les methodes presentent dedans permettent en majoriter de convertir les livres en fichier
+ */
 public class Bibliotheque {
     public String path;
     private static final Map<String, Integer> indentationDictionary = new HashMap<>();
@@ -58,7 +62,6 @@ public class Bibliotheque {
      * A cause de problèmes de librairies la fonctionnilté LoadXML utilise un reader au lieu de JaxB
      * Le reader vient boucler sur toutes les lignes du fichier pour lire toutes les balises
      * Ce mode de fonctionnement entraine des problèmes pour lire les fichiers XML mal formattés
-     * (ce qui est le cas avec la fonction toXml() qui sauvegarde tout sur une seul ligne
      */
     public void LoadXML(String filepath) throws IOException, XMLStreamException {
         XMLInputFactory factory = XMLInputFactory.newInstance();
@@ -110,8 +113,7 @@ public class Bibliotheque {
     /**
      * A cause de problèmes de librairies la fonctionnilté toXML utilise un writter au lieu de JaxB
      * Le writter vient boucler sur tout les livres presents dans la bibliotheque et enregistre les balises associés
-     * Ce mode de fonctionnement entraine des problèmes car nous n'avons pas trouver comment formatter le fichier l'enregistrement
-     * se fait sur une seule et même ligne ce qui pose probleme avec la fonction de relecture LoadXML()
+     * a partir d'un dictionnaire d'indentation le xml est formaté
      */
     public void toXml(String savingPath) throws IOException, XMLStreamException {
         XMLOutputFactory factory = XMLOutputFactory.newInstance();
@@ -192,13 +194,17 @@ public class Bibliotheque {
         writer.close();
     }
 
-    // Méthode utilitaire pour l'indentation
+    /**
+     * Méthode utilitaire pour l'indentation
+     */
     private void indent(XMLStreamWriter writer, String elementName) throws XMLStreamException {
         int indentLevel = indentationDictionary.get(elementName);
         String indentation = getIndentation(indentLevel);
         writer.writeCharacters(indentation);
     }
-
+    /**
+     * Méthode utilitaire pour l'indentation
+     */
     private String getIndentation(int indentLevel) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < indentLevel; i++) {
@@ -207,7 +213,9 @@ public class Bibliotheque {
         return sb.toString();
     }
 
-
+    /**
+     * Permet de convertir les livres stockes dans la bibliotheque en fichier docx
+     */
     public void toDocx(String savingPath) throws Exception {
         try (XWPFDocument doc = new XWPFDocument()) {
             for (Livre livre : livres) {
@@ -248,6 +256,9 @@ public class Bibliotheque {
         }
     }
 
+    /**
+     * Permet de convertir les livres stockes dans la bibliotheque en fichier pdf
+     */
     public void toPDF(String savingPath) throws Exception {
         try (PDDocument pdfDoc = new PDDocument()) {
             PDPage page = new PDPage(PDRectangle.A4);

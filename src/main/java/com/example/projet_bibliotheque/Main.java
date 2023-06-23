@@ -8,6 +8,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
+/**
+ * La class Main est le corp du projet elle sert a lancer l'application
+ */
 public class Main extends Application {
     @Override
     /**

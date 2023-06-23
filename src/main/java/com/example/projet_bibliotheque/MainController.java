@@ -44,7 +44,7 @@ public class MainController implements Initializable {
     @FXML private TextField inputPresentation;
     @FXML private TextField inputParution;
     @FXML private TextField inputColonne;
-    @FXML private TextField inputRangée;
+    @FXML private TextField inputRangee;
     @FXML private MenuItem btOuvrirBDD;
     @FXML private Label labelConnection;
 
@@ -65,7 +65,7 @@ public class MainController implements Initializable {
         try {
             livre.setParution(Integer.parseInt(inputParution.getText()));
             livre.setColonne(Integer.parseInt(inputColonne.getText()));
-            livre.setRangee(Integer.parseInt(inputRangée.getText()));
+            livre.setRangee(Integer.parseInt(inputRangee.getText()));
 
             livres.add(livre);
 
@@ -85,7 +85,7 @@ public class MainController implements Initializable {
                 livre.wrongFieldAlert.setContentText("Le champ parution doit être renseigné et de type entier");
             } else if (e.getMessage().contains(inputColonne.getText())) {
                 livre.wrongFieldAlert.setContentText("Le champ colonne doit être renseigné et de type entier");
-            } else if (e.getMessage().contains(inputRangée.getText())) {
+            } else if (e.getMessage().contains(inputRangee.getText())) {
                 livre.wrongFieldAlert.setContentText("Le champ rangée doit être renseigné et de type entier");
             }
             livre.wrongFieldAlert.showAndWait();
@@ -173,7 +173,7 @@ public class MainController implements Initializable {
                 inputPresentation.setText(newValue.getPresentation());
                 inputParution.setText(Integer.toString(newValue.getParution()));
                 inputColonne.setText(Integer.toString(newValue.getColonne()));
-                inputRangée.setText(Integer.toString(newValue.getRangee()));
+                inputRangee.setText(Integer.toString(newValue.getRangee()));
             }
         });
     }
@@ -188,7 +188,7 @@ public class MainController implements Initializable {
        inputPresentation.setText("");
        inputParution.setText("");
        inputColonne.setText("");
-       inputRangée.setText("");
+        inputRangee.setText("");
     }
 
     /**

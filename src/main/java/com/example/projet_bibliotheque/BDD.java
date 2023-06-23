@@ -5,6 +5,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * La class BDD sert a mettre les livres en base de donnee
+ * Elle gere tout ce qui est connection avec le sql
+ */
 public class BDD {
 
     Connection connection;
@@ -12,16 +16,30 @@ public class BDD {
     private String DB_USER = "root";
     private String DB_PASSWORD = "";
 
+    /**
+     * Permet de definir si la connection est ouverte ou non
+     */
     public boolean isConnected = false;
 
+
+    /**
+     * Constructeur de la BDD lors de l'instanciation creer une connection
+     */
     public BDD() {
         isConnected=this.CreateConnection();
     }
 
+    /**
+     * Setter de la connection
+     */
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
 
+
+    /**
+     * Permet d'ouvrir la connecteur il vient mettre a jour l'etat de la connection
+     */
     public boolean CreateConnection() {
         if (this.connection == null){
             try {
@@ -43,6 +61,9 @@ public class BDD {
         }
         return true;
     }
+    /**
+     * Permet de fermer la connection il vient mettre a jour l'etat de la connection
+     */
     public void closeConnection() {
         try {
             if (connection != null && !connection.isClosed()) {
