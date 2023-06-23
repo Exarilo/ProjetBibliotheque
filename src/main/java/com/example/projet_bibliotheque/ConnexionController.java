@@ -30,10 +30,19 @@ public class ConnexionController implements Initializable  {
     @FXML private Button btInscription;
     @FXML private TextField fieldUsername;
     @FXML private PasswordField fieldPassword;
+
+
+    /**
+     * Permet d'initialiser les utilisateurs valides
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         validUsers.put("admin", "admin");
     }
+
+    /**
+     * permet de gerer les champs affiches a l'utilisateur
+     */
     @FXML
     void handleInscription(ActionEvent event){
         if(labelConnexionInscription.getText() =="Inscription")
@@ -51,6 +60,10 @@ public class ConnexionController implements Initializable  {
     }
 
 
+
+    /**
+     * affiche une alerte avec le mdp par defaut
+     */
     public void handleOublieMDP(javafx.scene.input.MouseEvent mouseEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
@@ -59,6 +72,10 @@ public class ConnexionController implements Initializable  {
         alert.showAndWait();
     }
 
+
+    /**
+     * Permet de valider soit l'inscription soit la connexion
+     */
     @FXML
     void handleValider(ActionEvent event) throws IOException {
         if(labelConnexionInscription.getText() =="Inscription")
@@ -115,7 +132,4 @@ public class ConnexionController implements Initializable  {
             }
         }
     }
-
-
-
 }
