@@ -1,6 +1,6 @@
 package com.example.projet_bibliotheque;
 
-import javafx.beans.property.SimpleStringProperty;
+
 
 /**
  * La class Auteur contient tout ce qui est en relation avec l'ateur d'un livre

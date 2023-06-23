@@ -4,7 +4,6 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -133,14 +132,27 @@ public class MainController implements Initializable {
         stage.setResizable(false);
 
         VBox vbox = new VBox();
-        vbox.getChildren().add(new ImageView(new Image("https://static.vecteezy.com/ti/vecteur-libre/t2/2002332-ablack-man-avatar-character-isolated-icon-gratuit-vectoriel.jpg")));
-        vbox.getChildren().add(new ImageView(new Image("https://static.vecteezy.com/ti/vecteur-libre/t2/2002332-ablack-man-avatar-character-isolated-icon-gratuit-vectoriel.jpg")));
-        vbox.getChildren().add(new ImageView(new Image("https://static.vecteezy.com/ti/vecteur-libre/t2/2002332-ablack-man-avatar-character-isolated-icon-gratuit-vectoriel.jpg")));
+
+        ImageView image1 = new ImageView(new Image("https://w7.pngwing.com/pngs/985/915/png-transparent-superman-computer-icons-superhero-avatar-child-face-heroes.png"));
+        image1.setFitWidth(200);
+        image1.setFitHeight(200);
+        vbox.getChildren().add(image1);
+
+        ImageView image2 = new ImageView(new Image("https://cdn4.iconfinder.com/data/icons/avatars-xmas-giveaway/128/batman_hero_avatar_comics-512.png"));
+        image2.setFitWidth(200);
+        image2.setFitHeight(200);
+        vbox.getChildren().add(image2);
+
+        ImageView image3 = new ImageView(new Image("https://media.istockphoto.com/id/1329119908/vector/pixel-art-super-hero-peanut-character.jpg?s=612x612&w=0&k=20&c=gGruQxlHKo0GUKq07_cOibyGG8XML_EwdfrvncqccCA="));
+        image3.setFitWidth(200);
+        image3.setFitHeight(200);
+        vbox.getChildren().add(image3);
 
         Scene scene = new Scene(vbox);
         stage.setScene(scene);
         stage.show();
     }
+
 
     /**
      * initialise les champs necessaire a l'IHM a la creation
